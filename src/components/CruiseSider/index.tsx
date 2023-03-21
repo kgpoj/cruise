@@ -1,14 +1,26 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Layout, Menu } from 'antd';
 import { Link, useLocation } from 'react-router-dom';
 import {
   ClusterOutlined,
   DashboardOutlined,
-  QuestionCircleOutlined, RobotOutlined,
+  QuestionCircleOutlined,
+  RobotOutlined,
 } from '@ant-design/icons';
 import styled from 'styled-components';
+import DeviceContext from '../../store/DeviceContext';
 
 const { Sider } = Layout;
+
+const StyledSider = styled(Sider)`
+  .ant-layout-sider-zero-width-trigger {
+    position: fixed;
+    top: 10px;
+    left: 0;
+    background: transparent;
+    color: black;
+  }
+`;
 
 const StyledMenu = styled(Menu)`
   .ant-menu-item {
@@ -52,12 +64,16 @@ const menuItems = [
 
 const CruiseSider: React.FC = () => {
   const location = useLocation();
+  const isMobile = useContext(DeviceContext) === 'mobile';
   const currentKey = location.pathname.replace('/', '');
 
   return (
-    <Sider
+    <StyledSider
       theme="dark"
       width={250}
+      breakpoint="lg"
+      collapsedWidth="0"
+      defaultCollapsed={isMobile}
     >
       <StyledMenu
         items={menuItems}
@@ -66,7 +82,7 @@ const CruiseSider: React.FC = () => {
         selectedKeys={[currentKey]}
         defaultSelectedKeys={['agent']}
       />
-    </Sider>
+    </StyledSider>
   );
 };
 

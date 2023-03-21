@@ -9,15 +9,12 @@ import Agent from './pages/Agent';
 import MyCruise from './pages/MyCruise';
 import Help from './pages/Help';
 import logo from './assets/logo.png';
+import CruiseContextProvider from './store/CruiseContextProvider';
 
 const {
   Header,
   Content,
 } = Layout;
-
-const StyledLayout = styled(Layout)`
-  height: 100vh;
-`;
 
 const StyledHeader = styled(Header)`
   padding: 0 150px;
@@ -32,11 +29,14 @@ const StyledHeader = styled(Header)`
 
 const StyledMain = styled(Layout)`
   margin: 0 150px;
+  @media (max-width: 992px) {
+    margin: 0;
+  }
 `;
 
 const App: React.FC = () => (
   <Router>
-    <StyledLayout>
+    <CruiseContextProvider>
       <StyledHeader>
         <img alt="logo" src={logo} />
       </StyledHeader>
@@ -51,7 +51,7 @@ const App: React.FC = () => (
           </Routes>
         </Content>
       </StyledMain>
-    </StyledLayout>
+    </CruiseContextProvider>
   </Router>
 );
 
