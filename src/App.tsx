@@ -1,7 +1,6 @@
 import React from 'react';
 import { Layout } from 'antd';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import './App.css';
 import styled from 'styled-components';
 import CruiseSider from './components/CruiseSider';
 import Dashboard from './pages/Dashboard';
