@@ -26,32 +26,33 @@ const StyledMenu = styled(Menu)`
     color: #47a6c2;
   }
 `;
+
+const menuItems = [
+  {
+    key: 'dashboard',
+    label: <Link to="/dashboard">DASHBOARD</Link>,
+    icon: <DashboardOutlined />,
+  },
+  {
+    key: 'agent',
+    label: <Link to="/agent">AGENT</Link>,
+    icon: <ClusterOutlined />,
+  },
+  {
+    key: 'my-cruise',
+    icon: <RobotOutlined />,
+    label: <Link to="/my-cruise">MY CRUISE</Link>,
+  },
+  {
+    key: 'help',
+    icon: <QuestionCircleOutlined />,
+    label: <Link to="/help">HELP</Link>,
+  },
+];
+
 const CruiseSider: React.FC = () => {
   const location = useLocation();
   const currentKey = location.pathname.replace('/', '');
-
-  const menuItems = [
-    {
-      key: 'dashboard',
-      label: <Link to="/dashboard">DASHBOARD</Link>,
-      icon: <DashboardOutlined />,
-    },
-    {
-      key: 'agent',
-      label: <Link to="/agent">AGENT</Link>,
-      icon: <ClusterOutlined />,
-    },
-    {
-      key: 'my-cruise',
-      icon: <RobotOutlined />,
-      label: <Link to="/my-cruise">MY CRUISE</Link>,
-    },
-    {
-      key: 'help',
-      icon: <QuestionCircleOutlined />,
-      label: <Link to="/help">HELP</Link>,
-    },
-  ];
 
   return (
     <Sider
