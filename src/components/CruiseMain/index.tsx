@@ -19,20 +19,26 @@ const StyledMain = styled(Layout)`
     margin: 0;
   }
 `;
+
+const StyledContent = styled(Content)`
+  padding-top: 20px;
+  padding-left: 40px;
+`;
+
 const CruiseMain = () => {
   const deviceType = useContext(DeviceContext);
 
   return (
     <StyledMain>
       {deviceType === 'desktop' && <CruiseSider />}
-      <Content>
+      <StyledContent>
         <Routes>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/agent" element={<Agent />} />
           <Route path="/my-cruise" element={<MyCruise />} />
           <Route path="/help" element={<Help />} />
         </Routes>
-      </Content>
+      </StyledContent>
     </StyledMain>
   );
 };
