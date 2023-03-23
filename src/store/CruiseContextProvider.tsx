@@ -3,11 +3,12 @@ import styled from 'styled-components';
 import { Layout } from 'antd';
 import DeviceContext from './DeviceContext';
 
+type DeviceType = 'desktop' | 'tablet' | 'mobile';
 const StyledLayout = styled(Layout)`
   height: 100vh;
 `;
 const CruiseContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [deviceType, setDeviceType] = useState('');
+  const [deviceType, setDeviceType] = useState<DeviceType>('desktop');
 
   useEffect(() => {
     const handleResize = () => {
