@@ -1,7 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Layout } from 'antd';
 import styled from 'styled-components';
-import DeviceContext from '../../store/DeviceContext';
 import CruiseMenu from '../CruiseMenu';
 
 const { Sider } = Layout;
@@ -16,20 +15,14 @@ const StyledSider = styled(Sider)`
   }
 `;
 
-const CruiseSider: React.FC = () => {
-  const isMobile = useContext(DeviceContext) === 'mobile';
-
-  return (
-    <StyledSider
-      theme="dark"
-      width={250}
-      breakpoint="lg"
-      collapsedWidth="0"
-      defaultCollapsed={isMobile}
-    >
-      <CruiseMenu />
-    </StyledSider>
-  );
-};
+const CruiseSider: React.FC = () => (
+  <StyledSider
+    theme="dark"
+    width={250}
+    collapsible={false}
+  >
+    <CruiseMenu />
+  </StyledSider>
+);
 
 export default CruiseSider;
