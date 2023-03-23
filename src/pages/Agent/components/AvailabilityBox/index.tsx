@@ -55,7 +55,7 @@ const getCardSettings = (type: Availability) => {
   };
 };
 
-const AvailabilityBox: React.FC<Props> = ({ type, number = 3 }) => {
+const AvailabilityBox: React.FC<Props> = ({ type, number }) => {
   const cardSettings = getCardSettings(type);
   return (
     <StyledCard style={{ backgroundColor: cardSettings.backgroundColor }}>

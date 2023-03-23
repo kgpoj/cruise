@@ -39,7 +39,7 @@ const StyledDrawer = styled(Drawer)`
     height: 100%;
   }
 `;
-function CruiseHeader() {
+const CruiseHeader = () => {
   const deviceType = useContext(DeviceContext);
   const [open, setOpen] = useState(false);
   const showDrawer = () => {
@@ -68,6 +68,6 @@ function CruiseHeader() {
       <img alt="logo" src={logo} width={80} height={27} />
     </StyledHeader>
   );
-}
+};
 
 export default CruiseHeader;
