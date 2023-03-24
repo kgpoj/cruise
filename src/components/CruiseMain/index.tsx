@@ -25,7 +25,7 @@ const StyledContent = styled(Content)`
   padding-left: 40px;
 `;
 
-const CruiseMain = () => {
+const CruiseMain = (): JSX.Element => {
   const deviceType = useContext(DeviceContext);
 
   return (

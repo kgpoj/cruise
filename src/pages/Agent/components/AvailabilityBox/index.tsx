@@ -9,6 +9,12 @@ interface Props {
   number: number;
 }
 
+interface CardSettings {
+  backgroundColor: '#f4bb41' | '#8cb94f',
+  icon: React.ReactNode,
+  title: 'Building' | 'Idle'
+}
+
 const StyledCard = styled(Card)`
   width: 250px;
   height: 100px;
@@ -40,7 +46,7 @@ const NumberWrapper = styled.div`
   font-size: 38px;
 `;
 
-const getCardSettings = (type: Availability) => {
+const getCardSettings = (type: Availability): CardSettings => {
   if (type === 'building') {
     return {
       title: 'Building',

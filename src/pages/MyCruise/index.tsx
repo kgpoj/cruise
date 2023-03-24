@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MyCruise = () => (
+const MyCruise = (): JSX.Element => (
   <div>MyCruise</div>
 );
 

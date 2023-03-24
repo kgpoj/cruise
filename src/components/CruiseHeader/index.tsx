@@ -39,14 +39,14 @@ const StyledDrawer = styled(Drawer)`
     height: 100%;
   }
 `;
-const CruiseHeader = () => {
+const CruiseHeader = (): JSX.Element => {
   const deviceType = useContext(DeviceContext);
   const [open, setOpen] = useState(false);
-  const showDrawer = () => {
+  const showDrawer = (): void => {
     setOpen(true);
   };
 
-  const onClose = () => {
+  const onClose = (): void => {
     setOpen(false);
   };
   return (

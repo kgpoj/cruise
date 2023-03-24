@@ -7,11 +7,11 @@ type DeviceType = 'desktop' | 'tablet' | 'mobile';
 const StyledLayout = styled(Layout)`
   height: 100vh;
 `;
-const CruiseContextProvider = ({ children }: { children: React.ReactNode }) => {
+const CruiseContextProvider = ({ children }: { children: React.ReactNode }): JSX.Element => {
   const [deviceType, setDeviceType] = useState<DeviceType>('desktop');
 
   useEffect(() => {
-    const handleResize = () => {
+    const handleResize = (): void => {
       const width = window.innerWidth;
       if (width >= 992) {
         setDeviceType('desktop');

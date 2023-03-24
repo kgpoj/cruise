@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Help = () => (
+const Help = (): JSX.Element => (
   <div>help</div>
 );
 
