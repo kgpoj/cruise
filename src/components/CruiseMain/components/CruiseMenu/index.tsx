@@ -1,29 +1,27 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { BarsOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { Button, Drawer, Layout } from 'antd';
 import MenuContent from './components/MenuContent';
-import DeviceContext from '../../../../store/DeviceContext';
 
 const { Sider } = Layout;
 
-const StyledSider = styled(Sider)`
-  .ant-layout-sider-zero-width-trigger {
-    position: absolute;
-    top: -50px;
-    left: 0;
-    background: transparent;
-    color: black;
+const DesktopOnlySider = styled(Sider)`
+  @media (max-width: 992px) {
+    display: none;
   }
 `;
 
-const StyledButton = styled(Button)`
+const MobileOnlyButton = styled(Button)`
   font-size: 20px;
   color: black;
   position: fixed;
   left: 5px;
   top: 10px;
   z-index: 2;
+  @media (min-width: 992px) {
+    display: none;
+  }
 
   &.ant-btn-link:hover {
     color: black;
@@ -41,7 +39,6 @@ const StyledDrawer = styled(Drawer)`
 `;
 
 const CruiseMenu = (): JSX.Element => {
-  const deviceType = useContext(DeviceContext);
   const [open, setOpen] = useState(false);
   const showDrawer = (): void => {
     setOpen(true);
@@ -51,29 +48,28 @@ const CruiseMenu = (): JSX.Element => {
     setOpen(false);
   };
 
-  return deviceType === 'desktop'
-    ? (
-      <StyledSider
+  return (
+    <>
+      <DesktopOnlySider
         theme="dark"
         width={250}
         collapsible={false}
+        data-testid="sider"
       >
         <MenuContent />
-      </StyledSider>
-    )
-    : (
-      <>
-        <StyledButton type="link" icon={<BarsOutlined />} onClick={showDrawer} />
-        <StyledDrawer
-          placement="left"
-          closable={false}
-          onClose={onClose}
-          open={open}
-        >
-          <MenuContent />
-        </StyledDrawer>
-      </>
-    );
+      </DesktopOnlySider>
+      <MobileOnlyButton type="link" icon={<BarsOutlined />} onClick={showDrawer} data-testid="menu-button" />
+      <StyledDrawer
+        placement="left"
+        closable={false}
+        onClose={onClose}
+        open={open}
+        data-testid="drawer"
+      >
+        <MenuContent />
+      </StyledDrawer>
+    </>
+  );
 };
 
 export default CruiseMenu;
