@@ -10,15 +10,18 @@ interface Props {
 }
 
 interface CardSettings {
-  backgroundColor: '#f4bb41' | '#8cb94f',
   icon: React.ReactNode,
   title: 'Building' | 'Idle'
 }
 
-const StyledCard = styled(Card)`
+interface StyledCardProps {
+  cardType: Availability
+}
+
+const StyledCard = styled(Card)<StyledCardProps>`
   width: 250px;
   height: 100px;
-  background-color: #f4bb41;
+  background-color: ${(props) => (props.cardType === 'building' ? '#f4bb41' : '#8cb94f')};
   border: none;
   border-radius: 0;
   padding: 0;
@@ -46,25 +49,33 @@ const NumberWrapper = styled.div`
   font-size: 38px;
 `;
 
+const BuildingIcon = styled(SettingFilled)`
+  font-size: 100px;
+  color: #f6c44e;
+`;
+
+const IdleIcon = styled(HourglassFilled)`
+  font-size: 100px;
+  color: #9fc468;
+`;
+
 const getCardSettings = (type: Availability): CardSettings => {
   if (type === 'building') {
     return {
       title: 'Building',
-      backgroundColor: '#f4bb41',
-      icon: <SettingFilled style={{ fontSize: 100, color: '#f6c44e' }} />,
+      icon: <BuildingIcon />,
     };
   }
   return {
     title: 'Idle',
-    backgroundColor: '#8cb94f',
-    icon: <HourglassFilled style={{ fontSize: 100, color: '#9fc468' }} />,
+    icon: <IdleIcon />,
   };
 };
 
 const AvailabilityBox: React.FC<Props> = ({ type, number }) => {
   const cardSettings = getCardSettings(type);
   return (
-    <StyledCard style={{ backgroundColor: cardSettings.backgroundColor }}>
+    <StyledCard cardType={type}>
       <TitleWrapper>{cardSettings.title}</TitleWrapper>
       {cardSettings.icon}
       <NumberWrapper>{number}</NumberWrapper>
