@@ -38,6 +38,10 @@ const StyledDrawer = styled(Drawer)`
   }
 `;
 
+const drawerContentWrapperStyle = {
+  maxWidth: '50vw',
+};
+
 const CruiseMenu = (): JSX.Element => {
   const [open, setOpen] = useState(false);
   const showDrawer = (): void => {
@@ -65,6 +69,7 @@ const CruiseMenu = (): JSX.Element => {
         onClose={onClose}
         open={open}
         data-testid="drawer"
+        contentWrapperStyle={drawerContentWrapperStyle}
       >
         <MenuContent />
       </StyledDrawer>
