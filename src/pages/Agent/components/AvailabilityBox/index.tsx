@@ -7,7 +7,7 @@ import {
   BUILDING_COLOR, BUILDING_ICON_COLOR,
   IDLE_COLOR, IDLE_ICON_COLOR,
   LARGE_FONT_SIZE, NORMAL_CARD_HEIGHT,
-  NORMAL_FONT_SIZE,
+  NORMAL_FONT_SIZE, SMALL_CARD_HEIGHT,
 } from '../../../../constants/styles';
 
 interface Props {
@@ -29,6 +29,10 @@ const StyledCard = styled(Card)<StyledCardProps>`
   display: flex;
   align-items: center;
   justify-content: center;
+  
+  @media (max-width: 768px) {
+    height: ${SMALL_CARD_HEIGHT};
+  }
 `;
 
 const TitleWrapper = styled.div`
@@ -52,11 +56,19 @@ const NumberWrapper = styled.div`
 const BuildingIcon = styled(SettingFilled)`
   font-size: ${NORMAL_CARD_HEIGHT};
   color: ${BUILDING_ICON_COLOR};
+  
+  @media (max-width: 768px) {
+    font-size: ${SMALL_CARD_HEIGHT};
+  }
 `;
 
 const IdleIcon = styled(HourglassFilled)`
   font-size: ${NORMAL_CARD_HEIGHT};
   color: ${IDLE_ICON_COLOR};
+  
+  @media (max-width: 768px) {
+    font-size: ${SMALL_CARD_HEIGHT};
+  }
 `;
 const capitalizeFirstLetter = (str: string): string => str.charAt(0).toUpperCase() + str.slice(1);
 

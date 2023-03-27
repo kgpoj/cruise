@@ -5,3 +5,4 @@ export const BUILDING_ICON_COLOR = '#f6c44e';
 export const IDLE_COLOR = '#8cb94f';
 export const IDLE_ICON_COLOR = '#9cc65b';
 export const NORMAL_CARD_HEIGHT = '100px';
+export const SMALL_CARD_HEIGHT = '70px';
