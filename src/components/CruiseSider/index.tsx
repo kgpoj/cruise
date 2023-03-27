@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout } from 'antd';
 import styled from 'styled-components';
-import CruiseMenu from '../CruiseMenu';
+import MenuContent from '../MenuContent';
 
 const { Sider } = Layout;
 
@@ -21,7 +21,7 @@ const CruiseSider: React.FC = () => (
     width={250}
     collapsible={false}
   >
-    <CruiseMenu />
+    <MenuContent />
   </StyledSider>
 );
 

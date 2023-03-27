@@ -1,13 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Layout } from 'antd';
 import styled from 'styled-components';
-import CruiseSider from '../CruiseSider';
 import Dashboard from '../../pages/Dashboard';
 import Agent from '../../pages/Agent';
 import MyCruise from '../../pages/MyCruise';
 import Help from '../../pages/Help';
-import DeviceContext from '../../store/DeviceContext';
+import CruiseMenu from '../CruiseMenu';
 
 const {
   Content,
@@ -25,22 +24,17 @@ const StyledContent = styled(Content)`
   padding-left: 40px;
 `;
 
-const CruiseMain = (): JSX.Element => {
-  const deviceType = useContext(DeviceContext);
-
-  return (
-    <StyledMain>
-      {deviceType === 'desktop' && <CruiseSider />}
-      <StyledContent>
-        <Routes>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/agent" element={<Agent />} />
-          <Route path="/my-cruise" element={<MyCruise />} />
-          <Route path="/help" element={<Help />} />
-        </Routes>
-      </StyledContent>
-    </StyledMain>
-  );
-};
-
+const CruiseMain = (): JSX.Element => (
+  <StyledMain>
+    <CruiseMenu />
+    <StyledContent>
+      <Routes>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/agent" element={<Agent />} />
+        <Route path="/my-cruise" element={<MyCruise />} />
+        <Route path="/help" element={<Help />} />
+      </Routes>
+    </StyledContent>
+  </StyledMain>
+);
 export default CruiseMain;

@@ -1,71 +1,57 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import {
-  ClusterOutlined,
-  DashboardOutlined,
-  QuestionCircleOutlined,
-  RobotOutlined,
-} from '@ant-design/icons';
+import React, { useContext, useState } from 'react';
+import { BarsOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
-import { Menu } from 'antd';
+import { Button, Drawer } from 'antd';
+import CruiseSider from '../CruiseSider';
+import MenuContent from '../MenuContent';
+import DeviceContext from '../../store/DeviceContext';
 
-interface MenuItem {
-  key: 'dashboard' | 'agent' | 'my-cruise' | 'help'
-  label: React.ReactNode;
-  icon: React.ReactNode;
-}
+const StyledButton = styled(Button)`
+  font-size: 20px;
+  color: black;
+  position: fixed;
+  left: 5px;
+  top: 10px;
+  z-index: 2;
 
-const StyledMenu = styled(Menu)`
-  .ant-menu-item {
-    width: 100%;
-    margin-inline: 0;
-    margin-block: 15px 5px;
-    border-radius: 0;
-    
-    a {
-      transition: color 0.1s;
-    }
-  }
-  .ant-menu-item-selected {
-    background-color: #3e4959;
-    color: #47a6c2;
+  &.ant-btn-link:hover {
+    color: black;
   }
 `;
 
-const menuItems: MenuItem[] = [
-  {
-    key: 'dashboard',
-    label: <Link to="/dashboard">DASHBOARD</Link>,
-    icon: <DashboardOutlined />,
-  },
-  {
-    key: 'agent',
-    label: <Link to="/agent">AGENT</Link>,
-    icon: <ClusterOutlined />,
-  },
-  {
-    key: 'my-cruise',
-    icon: <RobotOutlined />,
-    label: <Link to="/my-cruise">MY CRUISE</Link>,
-  },
-  {
-    key: 'help',
-    icon: <QuestionCircleOutlined />,
-    label: <Link to="/help">HELP</Link>,
-  },
-];
-const CruiseMenu = (): JSX.Element => {
-  const location = useLocation();
-  const currentKey = location.pathname.replace('/', '');
+const StyledDrawer = styled(Drawer)`
+  .ant-drawer-body {
+    padding: 0;
+  }
+  
+  .ant-menu {
+    height: 100%;
+  }
+`;
 
-  return (
-    <StyledMenu
-      items={menuItems}
-      mode="inline"
-      theme="dark"
-      selectedKeys={[currentKey]}
-      defaultSelectedKeys={['agent']}
-    />
+const CruiseMenu = (): JSX.Element => {
+  const deviceType = useContext(DeviceContext);
+  const [open, setOpen] = useState(false);
+  const showDrawer = (): void => {
+    setOpen(true);
+  };
+
+  const onClose = (): void => {
+    setOpen(false);
+  };
+
+  return deviceType === 'desktop' ? <CruiseSider /> : (
+    <>
+      <StyledButton type="link" icon={<BarsOutlined />} onClick={showDrawer} />
+      <StyledDrawer
+        placement="left"
+        closable={false}
+        onClose={onClose}
+        open={open}
+      >
+        <MenuContent />
+      </StyledDrawer>
+    </>
   );
 };
 
