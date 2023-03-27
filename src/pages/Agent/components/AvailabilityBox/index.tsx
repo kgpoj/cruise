@@ -3,6 +3,12 @@ import { Card } from 'antd';
 import styled from 'styled-components';
 import { HourglassFilled, SettingFilled } from '@ant-design/icons';
 import { Availability } from '../../../../interface/Agent';
+import {
+  BUILDING_COLOR, BUILDING_ICON_COLOR,
+  IDLE_COLOR, IDLE_ICON_COLOR,
+  LARGE_FONT_SIZE, NORMAL_CARD_HEIGHT,
+  NORMAL_FONT_SIZE,
+} from '../../../../constants/styles';
 
 interface Props {
   type: Availability;
@@ -20,8 +26,8 @@ interface StyledCardProps {
 
 const StyledCard = styled(Card)<StyledCardProps>`
   width: 250px;
-  height: 100px;
-  background-color: ${(props) => (props.cardType === 'building' ? '#f4bb41' : '#8cb94f')};
+  height: ${NORMAL_CARD_HEIGHT};
+  background-color: ${(props) => (props.cardType === 'building' ? BUILDING_COLOR : IDLE_COLOR)};
   border: none;
   border-radius: 0;
   padding: 0;
@@ -37,7 +43,7 @@ const TitleWrapper = styled.div`
   left: 10px;
   background-color: transparent;
   color: white;
-  font-size: 16px;
+  font-size: ${NORMAL_FONT_SIZE};
   font-weight: bold;
 `;
 
@@ -46,17 +52,17 @@ const NumberWrapper = styled.div`
   bottom: 5px;
   right: 20px;
   color: white;
-  font-size: 38px;
+  font-size: ${LARGE_FONT_SIZE};
 `;
 
 const BuildingIcon = styled(SettingFilled)`
-  font-size: 100px;
-  color: #f6c44e;
+  font-size: ${NORMAL_CARD_HEIGHT};
+  color: ${BUILDING_ICON_COLOR};
 `;
 
 const IdleIcon = styled(HourglassFilled)`
-  font-size: 100px;
-  color: #9fc468;
+  font-size: ${NORMAL_CARD_HEIGHT};
+  color: ${IDLE_ICON_COLOR};
 `;
 
 const getCardSettings = (type: Availability): CardSettings => {
