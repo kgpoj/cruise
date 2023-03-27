@@ -2,9 +2,9 @@ import React, { useContext, useState } from 'react';
 import { BarsOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { Button, Drawer } from 'antd';
-import CruiseSider from '../CruiseSider';
-import MenuContent from '../MenuContent';
-import DeviceContext from '../../store/DeviceContext';
+import CruiseSider from './components/CruiseSider';
+import MenuContent from './components/MenuContent';
+import DeviceContext from '../../../../store/DeviceContext';
 
 const StyledButton = styled(Button)`
   font-size: 20px;

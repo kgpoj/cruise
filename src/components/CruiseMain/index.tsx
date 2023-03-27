@@ -6,7 +6,7 @@ import Dashboard from '../../pages/Dashboard';
 import Agent from '../../pages/Agent';
 import MyCruise from '../../pages/MyCruise';
 import Help from '../../pages/Help';
-import CruiseMenu from '../CruiseMenu';
+import CruiseMenu from './components/CruiseMenu';
 
 const {
   Content,

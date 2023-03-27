@@ -4,7 +4,7 @@ import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import userEvent from '@testing-library/user-event';
 import CruiseMenu from './index';
-import DeviceContext from '../../store/DeviceContext';
+import DeviceContext from '../../../../store/DeviceContext';
 
 describe('CruiseMenu', () => {
   const history = createMemoryHistory();
