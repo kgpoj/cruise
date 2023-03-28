@@ -13,6 +13,10 @@ const StyledCard = styled.div`
   background-color: white;
   display: flex;
   justify-content: space-between;
+
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    flex-direction: column;
+  }
 `;
 
 const CardItem = styled.div`
@@ -20,6 +24,10 @@ const CardItem = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    flex-direction: row;
+  }
 `;
 
 const Title = styled.div`
