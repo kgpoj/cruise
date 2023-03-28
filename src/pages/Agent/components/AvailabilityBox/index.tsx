@@ -14,12 +14,6 @@ interface Props {
   type: Availability;
   number: number;
 }
-
-interface CardSettings {
-  icon: React.ReactNode,
-  title: 'Building' | 'Idle'
-}
-
 interface StyledCardProps {
   cardType: Availability
 }
@@ -64,29 +58,14 @@ const IdleIcon = styled(HourglassFilled)`
   font-size: ${NORMAL_CARD_HEIGHT};
   color: ${IDLE_ICON_COLOR};
 `;
+const capitalizeFirstLetter = (str: string): string => str.charAt(0).toUpperCase() + str.slice(1);
 
-const getCardSettings = (type: Availability): CardSettings => {
-  if (type === 'building') {
-    return {
-      title: 'Building',
-      icon: <BuildingIcon />,
-    };
-  }
-  return {
-    title: 'Idle',
-    icon: <IdleIcon />,
-  };
-};
-
-const AvailabilityBox: React.FC<Props> = ({ type, number }) => {
-  const cardSettings = getCardSettings(type);
-  return (
-    <StyledCard cardType={type}>
-      <TitleWrapper>{cardSettings.title}</TitleWrapper>
-      {cardSettings.icon}
-      <NumberWrapper>{number}</NumberWrapper>
-    </StyledCard>
-  );
-};
+const AvailabilityBox: React.FC<Props> = ({ type, number }) => (
+  <StyledCard cardType={type}>
+    <TitleWrapper>{capitalizeFirstLetter(type)}</TitleWrapper>
+    {type === 'building' ? <BuildingIcon /> : <IdleIcon />}
+    <NumberWrapper>{number}</NumberWrapper>
+  </StyledCard>
+);
 
 export default AvailabilityBox;
