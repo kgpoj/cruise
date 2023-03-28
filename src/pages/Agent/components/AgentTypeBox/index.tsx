@@ -1,25 +1,53 @@
 import React from 'react';
+import styled from 'styled-components';
 
 interface AgentTypeBoxProps {
   physicalCount: number,
   virtualCount: number
 }
 
-const AgentTypeBox = ({ physicalCount, virtualCount }: AgentTypeBoxProps) => (
-  <div>
-    <div>
-      <div>ALL</div>
-      <div>{physicalCount + virtualCount}</div>
-    </div>
-    <div>
-      <div>PHYSICAL</div>
-      <div>{physicalCount}</div>
-    </div>
-    <div>
-      <div>VIRTUAL</div>
-      <div>{virtualCount}</div>
-    </div>
-  </div>
+const StyledCard = styled.div`
+  width: 250px;
+  height: 100px;
+  padding: 15px 20px 20px;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const CardItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Title = styled.div`
+  font-size: 12px;
+  font-weight: 500;
+  color: gray;
+`;
+
+const Count = styled.div`
+  font-size: 22px;
+  font-weight: 500;
+`;
+
+const AgentTypeBox = ({ physicalCount, virtualCount }: AgentTypeBoxProps): JSX.Element => (
+  <StyledCard>
+    <CardItem>
+      <Title>ALL</Title>
+      <Count>{physicalCount + virtualCount}</Count>
+    </CardItem>
+    <CardItem>
+      <Title>PHYSICAL</Title>
+      <Count>{physicalCount}</Count>
+    </CardItem>
+    <CardItem>
+      <Title>VIRTUAL</Title>
+      <Count>{virtualCount}</Count>
+    </CardItem>
+  </StyledCard>
 );
 
 export default AgentTypeBox;
