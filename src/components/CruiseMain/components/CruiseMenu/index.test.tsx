@@ -4,60 +4,46 @@ import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import userEvent from '@testing-library/user-event';
 import CruiseMenu from './index';
-import DeviceContext from '../../../../store/DeviceContext';
 
 describe('CruiseMenu', () => {
   const history = createMemoryHistory();
-
   it('should render sider when desktop', () => {
     render(
       <Router location={history.location} navigator={history}>
         <CruiseMenu />
       </Router>,
     );
-    const menu = screen.getByRole('menu');
+    const button = screen.queryByTestId('menu-button');
+    const sider = screen.getByTestId('sider');
+
     waitFor(() => {
-      expect(menu).toBeInTheDocument();
+      expect(sider).toBeVisible();
+      expect(button).not.toBeVisible();
     });
   });
 
   it('should render drawer when mobile', () => {
-    render(
-      <DeviceContext.Provider value="mobile">
-        <Router location={history.location} navigator={history}>
-          <CruiseMenu />
-        </Router>
-      </DeviceContext.Provider>,
+    Object.defineProperty(
+      window,
+      'innerWidth',
+      { writable: true, configurable: true, value: 200 },
     );
-    const button = screen.getByRole('button');
-    const menu = screen.queryByRole('menu');
+    render(
+      <Router location={history.location} navigator={history}>
+        <CruiseMenu />
+      </Router>,
+    );
+    const button = screen.getByTestId('menu-button');
+    const sider = screen.getByTestId('sider');
+    const drawer = screen.queryByTestId('drawer');
 
-    expect(menu).not.toBeInTheDocument();
     expect(button).toBeInTheDocument();
+    expect(sider).toBeInTheDocument();
+    expect(drawer).not.toBeInTheDocument();
 
     waitFor(() => {
       userEvent.click(button);
-      expect(menu).toBeInTheDocument();
-    });
-  });
-
-  it('should render drawer when tablet', () => {
-    render(
-      <DeviceContext.Provider value="tablet">
-        <Router location={history.location} navigator={history}>
-          <CruiseMenu />
-        </Router>
-      </DeviceContext.Provider>,
-    );
-    const button = screen.getByRole('button');
-    const menu = screen.queryByRole('menu');
-
-    expect(menu).not.toBeInTheDocument();
-    expect(button).toBeInTheDocument();
-
-    waitFor(() => {
-      userEvent.click(button);
-      expect(menu).toBeInTheDocument();
+      expect(drawer).toBeInTheDocument();
     });
   });
 });
