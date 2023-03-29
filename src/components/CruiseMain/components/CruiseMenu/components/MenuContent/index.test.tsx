@@ -3,9 +3,9 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import userEvent from '@testing-library/user-event';
-import CruiseSider from './index';
+import MenuContent from '.';
 
-describe('CruiseSider', () => {
+describe('MenuContent', () => {
   const history = createMemoryHistory();
   beforeEach(() => {
     history.push('/dashboard');
@@ -14,7 +14,7 @@ describe('CruiseSider', () => {
   it('renders a menu with correct items', async () => {
     render(
       <Router location={history.location} navigator={history}>
-        <CruiseSider />
+        <MenuContent />
       </Router>,
     );
 
@@ -42,7 +42,7 @@ describe('CruiseSider', () => {
   it('route to correct location based on selected menu item', async () => {
     render(
       <Router location={history.location} navigator={history}>
-        <CruiseSider />
+        <MenuContent />
       </Router>,
     );
     const agentMenuItem = screen.getByRole('link', {

@@ -9,6 +9,12 @@ import {
 import styled from 'styled-components';
 import { Menu } from 'antd';
 
+interface MenuItem {
+  key: 'dashboard' | 'agent' | 'my-cruise' | 'help'
+  label: React.ReactNode;
+  icon: React.ReactNode;
+}
+
 const StyledMenu = styled(Menu)`
   .ant-menu-item {
     width: 100%;
@@ -26,7 +32,7 @@ const StyledMenu = styled(Menu)`
   }
 `;
 
-const menuItems = [
+const menuItems: MenuItem[] = [
   {
     key: 'dashboard',
     label: <Link to="/dashboard">DASHBOARD</Link>,
@@ -48,7 +54,7 @@ const menuItems = [
     label: <Link to="/help">HELP</Link>,
   },
 ];
-const CruiseMenu = () => {
+const MenuContent = (): JSX.Element => {
   const location = useLocation();
   const currentKey = location.pathname.replace('/', '');
 
@@ -63,4 +69,4 @@ const CruiseMenu = () => {
   );
 };
 
-export default CruiseMenu;
+export default MenuContent;

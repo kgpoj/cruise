@@ -1,9 +1,7 @@
 import React from 'react';
 
-function Dashboard() {
-  return (
-    <div>dashboard</div>
-  );
-}
+const Dashboard = (): JSX.Element => (
+  <div>dashboard</div>
+);
 
 export default Dashboard;

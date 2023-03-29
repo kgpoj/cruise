@@ -1,10 +1,7 @@
-import React, { useContext, useState } from 'react';
-import { BarsOutlined } from '@ant-design/icons';
+import React from 'react';
 import styled from 'styled-components';
-import { Button, Drawer, Layout } from 'antd';
-import CruiseMenu from '../CruiseMenu';
+import { Layout } from 'antd';
 import logo from '../../assets/logo.png';
-import DeviceContext from '../../store/DeviceContext';
 
 const { Header } = Layout;
 
@@ -17,57 +14,9 @@ const StyledHeader = styled(Header)`
   align-items: center;
   justify-content: center;
 `;
-
-const StyledButton = styled(Button)`
-  font-size: 20px;
-  color: black;
-  position: absolute;
-  left: 5px;
-  top: 10px;
-
-  &.ant-btn-link:hover {
-    color: black;
-  }
-`;
-
-const StyledDrawer = styled(Drawer)`
-  .ant-drawer-body {
-    padding: 0;
-  }
-  
-  .ant-menu {
-    height: 100%;
-  }
-`;
-function CruiseHeader() {
-  const deviceType = useContext(DeviceContext);
-  const [open, setOpen] = useState(false);
-  const showDrawer = () => {
-    setOpen(true);
-  };
-
-  const onClose = () => {
-    setOpen(false);
-  };
-  return (
-    <StyledHeader>
-      {!(deviceType === 'desktop')
-        && (
-          <>
-            <StyledButton type="link" icon={<BarsOutlined />} onClick={showDrawer} />
-            <StyledDrawer
-              placement="left"
-              closable={false}
-              onClose={onClose}
-              open={open}
-            >
-              <CruiseMenu />
-            </StyledDrawer>
-          </>
-        )}
-      <img alt="logo" src={logo} width={80} height={27} />
-    </StyledHeader>
-  );
-}
-
+const CruiseHeader = (): JSX.Element => (
+  <StyledHeader>
+    <img alt="logo" src={logo} width={80} height={27} />
+  </StyledHeader>
+);
 export default CruiseHeader;
