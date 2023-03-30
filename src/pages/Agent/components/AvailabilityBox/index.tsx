@@ -19,7 +19,7 @@ interface StyledCardProps {
 }
 
 const StyledCard = styled(Card)<StyledCardProps>`
-  width: 250px;
+  flex: 1;
   height: ${NORMAL_CARD_HEIGHT};
   background-color: ${(props) => (props.cardType === 'building' ? BUILDING_COLOR : IDLE_COLOR)};
   border: none;

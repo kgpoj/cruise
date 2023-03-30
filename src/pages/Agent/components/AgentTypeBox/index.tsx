@@ -7,7 +7,7 @@ interface AgentTypeBoxProps {
 }
 
 const StyledCard = styled.div`
-  width: 250px;
+  flex: 1;
   height: 100px;
   padding: 15px 20px 20px;
   background-color: white;
@@ -16,11 +16,6 @@ const StyledCard = styled.div`
 
   @media screen and (min-width: 768px) and (max-width: 992px) {
     flex-direction: column;
-  }
-
-  @media screen and (max-width: 768px) {
-    flex-basis: 100%;
-    margin-top: 12px;
   }
 `;
 

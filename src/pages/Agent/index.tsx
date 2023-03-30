@@ -7,6 +7,7 @@ const StatusBoxWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
+  gap: 20px 10px;
 
   @media screen and (max-width: 768px) {
     flex-wrap: wrap;
