@@ -14,7 +14,7 @@ const {
 
 const StyledMain = styled(Layout)`
   margin: 0 20%;
-  @media (max-width: 992px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.lg}) {
     margin: 0;
   }
 `;

@@ -16,11 +16,18 @@ interface MenuItem {
 }
 
 const StyledMenu = styled(Menu)`
+  color: rgba(255, 255, 255, 0.65);
+  background: #001529;
+  
   .ant-menu-item {
     width: 100%;
     margin-inline: 0;
     margin-block: 15px 5px;
     border-radius: 0;
+
+  &:hover:not(.ant-menu-item-selected):not(.ant-menu-submenu-selected) {
+    color: #fff;
+  }
     
     a {
       transition: color 0.1s;
@@ -62,7 +69,6 @@ const MenuContent = (): JSX.Element => {
     <StyledMenu
       items={menuItems}
       mode="inline"
-      theme="dark"
       selectedKeys={[currentKey]}
       defaultSelectedKeys={['agent']}
     />

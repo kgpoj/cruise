@@ -7,7 +7,7 @@ import MenuContent from './components/MenuContent';
 const { Sider } = Layout;
 
 const DesktopOnlySider = styled(Sider)`
-  @media (max-width: 992px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.lg}) {
     display: none;
   }
 `;
@@ -19,7 +19,7 @@ const MobileOnlyButton = styled(Button)`
   left: 5px;
   top: 10px;
   z-index: 2;
-  @media (min-width: 992px) {
+  @media (min-width: ${(props) => props.theme.breakpoints.lg}) {
     display: none;
   }
 
@@ -55,7 +55,6 @@ const CruiseMenu = (): JSX.Element => {
   return (
     <>
       <DesktopOnlySider
-        theme="dark"
         width={250}
         collapsible={false}
         data-testid="sider"

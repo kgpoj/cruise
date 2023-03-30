@@ -3,12 +3,6 @@ import { Card } from 'antd';
 import styled from 'styled-components';
 import { HourglassFilled, SettingFilled } from '@ant-design/icons';
 import { Availability } from '../../../../interface/Agent';
-import {
-  BUILDING_COLOR, BUILDING_ICON_COLOR,
-  IDLE_COLOR, IDLE_ICON_COLOR,
-  LARGE_FONT_SIZE, NORMAL_CARD_HEIGHT,
-  NORMAL_FONT_SIZE, SMALL_CARD_HEIGHT,
-} from '../../../../constants/styles';
 
 interface Props {
   type: Availability;
@@ -18,10 +12,18 @@ interface StyledCardProps {
   cardType: Availability
 }
 
+const SMALL_CARD_HEIGHT = '70px';
+const NORMAL_CARD_HEIGHT = '100px';
+const BUILDING_ICON_COLOR = '#f6c44e';
+const IDLE_ICON_COLOR = '#9cc65b';
+
 const StyledCard = styled(Card)<StyledCardProps>`
   flex: 1;
   height: ${NORMAL_CARD_HEIGHT};
-  background-color: ${(props) => (props.cardType === 'building' ? BUILDING_COLOR : IDLE_COLOR)};
+  background-color: ${(props) => (props.cardType === 'building'
+    ? props.theme.colors.building
+    : props.theme.colors.idle
+  )};
   border: none;
   border-radius: 0;
   padding: 0;
@@ -30,7 +32,7 @@ const StyledCard = styled(Card)<StyledCardProps>`
   align-items: center;
   justify-content: center;
   
-  @media (max-width: 768px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     height: ${SMALL_CARD_HEIGHT};
   }
 `;
@@ -41,7 +43,7 @@ const TitleWrapper = styled.div`
   left: 10px;
   background-color: transparent;
   color: white;
-  font-size: ${NORMAL_FONT_SIZE};
+  font-size: ${(props) => props.theme.fontSizes.normal};
   font-weight: bold;
 `;
 
@@ -50,14 +52,14 @@ const NumberWrapper = styled.div`
   bottom: 5px;
   right: 20px;
   color: white;
-  font-size: ${LARGE_FONT_SIZE};
+  font-size: ${(props) => props.theme.fontSizes.large};
 `;
 
 const BuildingIcon = styled(SettingFilled)`
   font-size: ${NORMAL_CARD_HEIGHT};
   color: ${BUILDING_ICON_COLOR};
   
-  @media (max-width: 768px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     font-size: ${SMALL_CARD_HEIGHT};
   }
 `;
@@ -66,7 +68,7 @@ const IdleIcon = styled(HourglassFilled)`
   font-size: ${NORMAL_CARD_HEIGHT};
   color: ${IDLE_ICON_COLOR};
   
-  @media (max-width: 768px) {
+  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
     font-size: ${SMALL_CARD_HEIGHT};
   }
 `;
