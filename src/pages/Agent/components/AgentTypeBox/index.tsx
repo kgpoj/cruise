@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { NORMAL_CARD_HEIGHT, SMALL_CARD_HEIGHT } from '../../../../constants/styles';
 
 interface AgentTypeBoxProps {
   physicalCount: number,
@@ -8,7 +9,7 @@ interface AgentTypeBoxProps {
 
 const StyledCard = styled.div`
   flex: 1;
-  height: 100px;
+  height: ${NORMAL_CARD_HEIGHT};
   padding: 15px 20px 20px;
   background-color: white;
   display: flex;
@@ -16,6 +17,10 @@ const StyledCard = styled.div`
 
   @media screen and (min-width: 768px) and (max-width: 992px) {
     flex-direction: column;
+  }
+
+  @media (max-width: 768px) {
+    height: ${SMALL_CARD_HEIGHT};
   }
 `;
 
