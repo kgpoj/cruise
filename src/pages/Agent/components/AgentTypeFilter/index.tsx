@@ -3,9 +3,15 @@ import type { RadioChangeEvent } from 'antd';
 import { Radio } from 'antd';
 import styled, { css } from 'styled-components';
 import { Colors } from '../../../../interface/Colors';
+import { TypeFilter } from '../../../../interface/Agent';
 
 interface AgentTypeFilterProps {
   onChange: (e: RadioChangeEvent) => void
+}
+
+interface AgentTypeButtonProps {
+  value: TypeFilter;
+  children: React.ReactNode;
 }
 
 const COLORS: Colors = {
@@ -45,11 +51,15 @@ const StyledRadioGroup = styled(Radio.Group)`
   }
 `;
 
+const AgentTypeButton = ({ value, children }: AgentTypeButtonProps): JSX.Element => (
+  <Radio.Button value={value}>{children}</Radio.Button>
+);
+
 const AgentTypeFilter = ({ onChange }: AgentTypeFilterProps): JSX.Element => (
   <StyledRadioGroup onChange={onChange} defaultValue="all">
-    <Radio.Button value="all">All</Radio.Button>
-    <Radio.Button value="physical">Physical</Radio.Button>
-    <Radio.Button value="virtual">Virtual</Radio.Button>
+    <AgentTypeButton value="all">All</AgentTypeButton>
+    <AgentTypeButton value="physical">Physical</AgentTypeButton>
+    <AgentTypeButton value="virtual">Virtual</AgentTypeButton>
   </StyledRadioGroup>
 );
 

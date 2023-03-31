@@ -18,3 +18,5 @@ export interface Agent {
   agentType: AgentType;
   resources: Resource[];
 }
+
+export type TypeFilter = AgentType | 'all';
