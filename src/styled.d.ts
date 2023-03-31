@@ -5,6 +5,8 @@ declare module 'styled-components' {
     colors: {
       building: string;
       idle: string;
+      grey: string;
+      primary: string;
     };
     fontSizes: {
       normal: string;

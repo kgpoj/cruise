@@ -4,6 +4,8 @@ const theme: DefaultTheme = {
   colors: {
     building: '#f4bb41',
     idle: '#8cb94f',
+    grey: '#d9d9d9',
+    primary: '#68afc9',
   },
   fontSizes: {
     normal: '1rem',
