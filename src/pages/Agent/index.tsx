@@ -1,18 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { RadioChangeEvent } from 'antd';
 import AgentTypeBox from './components/AgentTypeBox';
 import AvailabilityBox from './components/AvailabilityBox';
 import AgentTypeFilter from './components/AgentTypeFilter';
+import { TypeFilter } from '../../interface/Agent';
+import agentListData from '../../mock/agentMockData';
+import AgentList from './components/AgentList';
 
 const PageWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
-const handleRadioChange = (e: RadioChangeEvent): void => {
-  console.log(`radio checked:${e.target.value}`);
-};
 
 const StatusBoxWrapper = styled.div`
   display: flex;
@@ -20,19 +19,35 @@ const StatusBoxWrapper = styled.div`
   margin-bottom: 20px;
   gap: 15px 10px;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: ${(props) => props.theme.breakpoints.sm}) {
     flex-wrap: wrap;
   }
 `;
-const Agent = (): JSX.Element => (
-  <PageWrapper>
-    <StatusBoxWrapper>
-      <AvailabilityBox type="building" number={4} />
-      <AvailabilityBox type="idle" number={4} />
-      <AgentTypeBox physicalCount={4} virtualCount={5} />
-    </StatusBoxWrapper>
-    <AgentTypeFilter onChange={handleRadioChange} />
-  </PageWrapper>
-);
+
+const Agent = (): JSX.Element => {
+  const [agentType, setAgentType] = useState<TypeFilter>('all');
+
+  const filteredData = agentListData.filter((agent) => {
+    if (agentType === 'all') {
+      return true;
+    }
+    return agent.agentType === agentType;
+  });
+  const handleRadioChange = (e: RadioChangeEvent): void => {
+    setAgentType(e.target.value as TypeFilter);
+  };
+
+  return (
+    <PageWrapper>
+      <StatusBoxWrapper>
+        <AvailabilityBox type="building" number={4} />
+        <AvailabilityBox type="idle" number={4} />
+        <AgentTypeBox physicalCount={4} virtualCount={5} />
+      </StatusBoxWrapper>
+      <AgentTypeFilter onChange={handleRadioChange} />
+      <AgentList dataSource={filteredData} />
+    </PageWrapper>
+  );
+};
 
 export default Agent;
