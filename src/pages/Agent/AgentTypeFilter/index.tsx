@@ -2,8 +2,8 @@ import React from 'react';
 import type { RadioChangeEvent } from 'antd';
 import { Radio } from 'antd';
 import styled, { css } from 'styled-components';
-import { Colors } from '../../../../interface/Colors';
-import { TypeFilter } from '../../../../interface/Agent';
+import { Colors } from '../../../interface/Colors';
+import { TypeFilter } from '../../../interface/Agent';
 
 interface AgentTypeFilterProps {
   onChange: (e: RadioChangeEvent) => void

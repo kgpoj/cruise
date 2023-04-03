@@ -1,7 +1,7 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
 import AvailabilityBox from './index';
-import renderWithGlobalWrapper from '../../../../utils/testUtils';
+import renderWithGlobalWrapper from '../../../utils/testUtils';
 
 describe('AvailabilityBox', () => {
   it('renders correctly', () => {

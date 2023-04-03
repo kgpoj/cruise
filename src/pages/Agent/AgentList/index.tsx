@@ -1,6 +1,6 @@
 import React from 'react';
 import { Avatar, List } from 'antd';
-import { Agent } from '../../../../interface/Agent';
+import { Agent } from '../../../interface/Agent';
 
 interface AgentListProps {
   dataSource: Agent[]

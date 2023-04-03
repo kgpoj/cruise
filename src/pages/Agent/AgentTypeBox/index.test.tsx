@@ -1,7 +1,7 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
 import AgentTypeBox from './index';
-import renderWithGlobalWrapper from '../../../../utils/testUtils';
+import renderWithGlobalWrapper from '../../../utils/testUtils';
 
 describe('AgentTypeBox', () => {
   const physicalCount = 4;

@@ -2,7 +2,7 @@ import React from 'react';
 import { Card } from 'antd';
 import styled from 'styled-components';
 import { HourglassFilled, SettingFilled } from '@ant-design/icons';
-import { Availability } from '../../../../interface/Agent';
+import { Availability } from '../../../interface/Agent';
 
 interface Props {
   type: Availability;

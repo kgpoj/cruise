@@ -2,8 +2,8 @@ import React from 'react';
 import { screen, waitFor } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import userEvent from '@testing-library/user-event';
-import MenuContent from '.';
-import renderWithGlobalWrapper from '../../../../../../utils/testUtils';
+import MenuContent from './index';
+import renderWithGlobalWrapper from '../../../../../utils/testUtils';
 
 describe('MenuContent', () => {
   const history = createMemoryHistory();

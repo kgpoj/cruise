@@ -1,8 +1,8 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
 import AgentList from './index';
-import mockAgentsData from '../../../../mock/mockAgentsData';
-import renderWithGlobalWrapper from '../../../../utils/testUtils';
+import mockAgentsData from '../../../mock/mockAgentsData';
+import renderWithGlobalWrapper from '../../../utils/testUtils';
 
 describe('AgentList', () => {
   it('should render correctly', () => {

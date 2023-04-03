@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BarsOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { Button, Drawer, Layout } from 'antd';
-import MenuContent from './components/MenuContent';
+import MenuContent from './MenuContent';
 
 const { Sider } = Layout;
 
