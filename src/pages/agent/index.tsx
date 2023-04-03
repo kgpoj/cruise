@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { RadioChangeEvent } from 'antd';
-import AgentTypeBox from './AgentTypeBox';
-import AvailabilityBox from './AvailabilityBox';
-import AgentTypeFilter from './AgentTypeFilter';
+import AgentTypeBox from './agent-type-box';
+import AvailabilityBox from './availability-box';
+import AgentTypeFilter from './agent-type-filter';
 import { TypeFilter } from '../../interface/Agent';
 import mockAgentsData from '../../mock/mockAgentsData';
-import AgentList from './AgentList';
+import AgentList from './agent-list';
 
 const PageWrapper = styled.div`
   display: flex;

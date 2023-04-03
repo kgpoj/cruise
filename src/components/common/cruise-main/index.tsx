@@ -2,11 +2,11 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Layout } from 'antd';
 import styled from 'styled-components';
-import Dashboard from '../../../pages/Dashboard';
-import Agent from '../../../pages/Agent';
-import MyCruise from '../../../pages/MyCruise';
-import Help from '../../../pages/Help';
-import CruiseMenu from './CruiseMenu';
+import Dashboard from '../../../pages/dashboard';
+import Agent from '../../../pages/agent';
+import MyCruise from '../../../pages/my-cruise';
+import Help from '../../../pages/help';
+import CruiseMenu from './cruise-menu';
 
 const {
   Content,
