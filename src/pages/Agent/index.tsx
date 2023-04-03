@@ -5,7 +5,7 @@ import AgentTypeBox from './components/AgentTypeBox';
 import AvailabilityBox from './components/AvailabilityBox';
 import AgentTypeFilter from './components/AgentTypeFilter';
 import { TypeFilter } from '../../interface/Agent';
-import agentListData from '../../mock/agentMockData';
+import mockAgentsData from '../../mock/mockAgentsData';
 import AgentList from './components/AgentList';
 
 const PageWrapper = styled.div`
@@ -27,7 +27,7 @@ const StatusBoxWrapper = styled.div`
 const Agent = (): JSX.Element => {
   const [agentType, setAgentType] = useState<TypeFilter>('all');
 
-  const filteredData = agentListData.filter((agent) => {
+  const filteredData = mockAgentsData.filter((agent) => {
     if (agentType === 'all') {
       return true;
     }

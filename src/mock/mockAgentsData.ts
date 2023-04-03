@@ -1,6 +1,6 @@
 import { Agent } from '../interface/Agent';
 
-const agentListData: Agent[] = [
+const mockAgentsData: Agent[] = [
   {
     id: '1',
     name: 'Agent 1',
@@ -134,4 +134,4 @@ const agentListData: Agent[] = [
   },
 ];
 
-export default agentListData;
+export default mockAgentsData;
