@@ -16,6 +16,10 @@ declare module 'styled-components' {
       isDesktop: string;
       isTablet: string;
       isMobile: string;
+    };
+    heights: {
+      normalCard: string;
+      smallCard: string;
     }
   }
 }

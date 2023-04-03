@@ -21,6 +21,10 @@ const theme: DefaultTheme = {
     isTablet: `@media (min-width: ${screenSize.sm}) and (max-width: ${screenSize.lg})`,
     isMobile: `@media (max-width: ${screenSize.sm})`,
   },
+  heights: {
+    normalCard: '100px',
+    smallCard: '90px',
+  },
 };
 
 export default theme;

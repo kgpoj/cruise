@@ -12,14 +12,12 @@ interface StyledCardProps {
   cardtype: Availability
 }
 
-const SMALL_CARD_HEIGHT = '70px';
-const NORMAL_CARD_HEIGHT = '100px';
 const BUILDING_ICON_COLOR = '#f6c44e';
 const IDLE_ICON_COLOR = '#9cc65b';
 
 const StyledCard = styled(Card)<StyledCardProps>`
   flex: 1;
-  height: ${NORMAL_CARD_HEIGHT};
+  height: ${({ theme }) => theme.heights.normalCard};
   background-color: ${(props) => (props.cardtype === 'building'
     ? props.theme.colors.building
     : props.theme.colors.idle
@@ -33,7 +31,7 @@ const StyledCard = styled(Card)<StyledCardProps>`
   justify-content: center;
   
   ${({ theme }) => theme.mediaQueries.isMobile} {
-    height: ${SMALL_CARD_HEIGHT};
+    height: ${({ theme }) => theme.heights.smallCard};
   }
 `;
 
@@ -56,20 +54,20 @@ const NumberWrapper = styled.div`
 `;
 
 const BuildingIcon = styled(SettingFilled)`
-  font-size: ${NORMAL_CARD_HEIGHT};
+  font-size: ${({ theme }) => theme.heights.normalCard};
   color: ${BUILDING_ICON_COLOR};
   
   ${({ theme }) => theme.mediaQueries.isMobile} {
-    font-size: ${SMALL_CARD_HEIGHT};
+    font-size: ${({ theme }) => theme.heights.smallCard};
   }
 `;
 
 const IdleIcon = styled(HourglassFilled)`
-  font-size: ${NORMAL_CARD_HEIGHT};
+  font-size: ${({ theme }) => theme.heights.normalCard};
   color: ${IDLE_ICON_COLOR};
   
   ${({ theme }) => theme.mediaQueries.isMobile} {
-    font-size: ${SMALL_CARD_HEIGHT};
+    font-size: ${({ theme }) => theme.heights.smallCard};
   }
 `;
 const capitalizeFirstLetter = (str: string): string => str.charAt(0).toUpperCase() + str.slice(1);
