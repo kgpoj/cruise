@@ -13,22 +13,22 @@ const {
 } = Layout;
 
 const StyledMain = styled(Layout)`
-  margin: 0 20%;
-  @media (max-width: ${(props) => props.theme.breakpoints.lg}) {
-    margin: 0;
+  margin: 0;
+  ${({ theme }) => theme.mediaQueries.isDesktop} {
+    margin: 0 20%;
   }
 `;
 
 const StyledContent = styled(Content)`
   padding-top: 20px;
   padding-left: 40px;
-
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  
+  ${({ theme }) => theme.mediaQueries.isTablet} {
     padding-left: 10px;
     padding-right: 10px;
   }
 
-  @media screen and (max-width: 768px) {
+  ${({ theme }) => theme.mediaQueries.isMobile} {
     padding-left: 5px;
     padding-right: 5px;
   }

@@ -19,7 +19,7 @@ const StatusBoxWrapper = styled.div`
   margin-bottom: 20px;
   gap: 15px 10px;
 
-  @media screen and (max-width: ${(props) => props.theme.breakpoints.sm}) {
+  ${({ theme }) => theme.mediaQueries.isMobile} {
     flex-wrap: wrap;
   }
 `;

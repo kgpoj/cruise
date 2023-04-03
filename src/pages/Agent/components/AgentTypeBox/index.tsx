@@ -15,11 +15,11 @@ const StyledCard = styled.div`
   display: flex;
   justify-content: space-between;
 
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  ${({ theme }) => theme.mediaQueries.isTablet} {
     flex-direction: column;
   }
 
-  @media (max-width: 768px) {
+  ${({ theme }) => theme.mediaQueries.isMobile} {
     height: ${SMALL_CARD_HEIGHT};
   }
 `;
@@ -30,7 +30,7 @@ const CardItem = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  @media screen and (min-width: 768px) and (max-width: 992px) {
+  ${({ theme }) => theme.mediaQueries.isTablet} {
     flex-direction: row;
   }
 `;

@@ -32,7 +32,7 @@ const StyledCard = styled(Card)<StyledCardProps>`
   align-items: center;
   justify-content: center;
   
-  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+  ${({ theme }) => theme.mediaQueries.isMobile} {
     height: ${SMALL_CARD_HEIGHT};
   }
 `;
@@ -59,7 +59,7 @@ const BuildingIcon = styled(SettingFilled)`
   font-size: ${NORMAL_CARD_HEIGHT};
   color: ${BUILDING_ICON_COLOR};
   
-  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+  ${({ theme }) => theme.mediaQueries.isMobile} {
     font-size: ${SMALL_CARD_HEIGHT};
   }
 `;
@@ -68,7 +68,7 @@ const IdleIcon = styled(HourglassFilled)`
   font-size: ${NORMAL_CARD_HEIGHT};
   color: ${IDLE_ICON_COLOR};
   
-  @media (max-width: ${(props) => props.theme.breakpoints.sm}) {
+  ${({ theme }) => theme.mediaQueries.isMobile} {
     font-size: ${SMALL_CARD_HEIGHT};
   }
 `;

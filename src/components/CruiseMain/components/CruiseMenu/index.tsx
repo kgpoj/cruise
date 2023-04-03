@@ -7,8 +7,9 @@ import MenuContent from './components/MenuContent';
 const { Sider } = Layout;
 
 const DesktopOnlySider = styled(Sider)`
-  @media (max-width: ${(props) => props.theme.breakpoints.lg}) {
-    display: none;
+  display: none;
+  ${({ theme }) => theme.mediaQueries.isDesktop} {
+    display: block;
   }
 `;
 
@@ -19,7 +20,7 @@ const MobileOnlyButton = styled(Button)`
   left: 5px;
   top: 10px;
   z-index: 2;
-  @media (min-width: ${(props) => props.theme.breakpoints.lg}) {
+  ${({ theme }) => theme.mediaQueries.isDesktop} {
     display: none;
   }
 

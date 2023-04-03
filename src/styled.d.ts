@@ -12,9 +12,10 @@ declare module 'styled-components' {
       normal: string;
       large: string;
     };
-    breakpoints: {
-      lg: string;
-      sm: string;
+    mediaQueries: {
+      isDesktop: string;
+      isTablet: string;
+      isMobile: string;
     }
   }
 }
