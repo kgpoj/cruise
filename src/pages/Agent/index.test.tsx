@@ -1,16 +1,13 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import Agent from './index';
-import CruiseContextProvider from '../../store/CruiseContextProvider';
 import agentListData from '../../mock/agentMockData';
+import renderWithGlobalWrapper from '../../utils/testUtils';
 
 describe('Agent', () => {
   it('should render correctly', () => {
-    render(
-      <Agent />,
-      { wrapper: CruiseContextProvider },
-    );
+    renderWithGlobalWrapper(<Agent />);
 
     agentListData.map((agent) => agent.name).forEach((name) => {
       expect(screen.getByText(name)).toBeInTheDocument();
@@ -18,10 +15,7 @@ describe('Agent', () => {
   });
 
   it('should filter correctly', () => {
-    render(
-      <Agent />,
-      { wrapper: CruiseContextProvider },
-    );
+    renderWithGlobalWrapper(<Agent />);
 
     waitFor(() => {
       userEvent.click(screen.getByRole('radio', { name: 'Virtual' }));

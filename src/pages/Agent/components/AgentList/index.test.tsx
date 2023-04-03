@@ -1,11 +1,12 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import AgentList from './index';
 import agentListData from '../../../../mock/agentMockData';
+import renderWithGlobalWrapper from '../../../../utils/testUtils';
 
 describe('AgentList', () => {
   it('should render correctly', () => {
-    render(<AgentList dataSource={agentListData} />);
+    renderWithGlobalWrapper(<AgentList dataSource={agentListData} />);
     expect(screen.getByText('Agent 1')).toBeInTheDocument();
   });
 });

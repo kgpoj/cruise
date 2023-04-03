@@ -1,9 +1,9 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
-import { Router } from 'react-router-dom';
+import { screen, waitFor } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import userEvent from '@testing-library/user-event';
 import MenuContent from '.';
+import renderWithGlobalWrapper from '../../../../../../utils/testUtils';
 
 describe('MenuContent', () => {
   const history = createMemoryHistory();
@@ -12,11 +12,7 @@ describe('MenuContent', () => {
   });
 
   it('renders a menu with correct items', async () => {
-    render(
-      <Router location={history.location} navigator={history}>
-        <MenuContent />
-      </Router>,
-    );
+    renderWithGlobalWrapper(<MenuContent />);
 
     const dashboardMenuItem = screen.getByRole('link', {
       name: /dashboard/i,
@@ -40,11 +36,8 @@ describe('MenuContent', () => {
   });
 
   it('route to correct location based on selected menu item', async () => {
-    render(
-      <Router location={history.location} navigator={history}>
-        <MenuContent />
-      </Router>,
-    );
+    renderWithGlobalWrapper(<MenuContent />, history);
+
     const agentMenuItem = screen.getByRole('link', {
       name: /agent/i,
     });

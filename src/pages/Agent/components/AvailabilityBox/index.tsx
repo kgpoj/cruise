@@ -9,7 +9,7 @@ interface Props {
   number: number;
 }
 interface StyledCardProps {
-  cardType: Availability
+  cardtype: Availability
 }
 
 const SMALL_CARD_HEIGHT = '70px';
@@ -20,7 +20,7 @@ const IDLE_ICON_COLOR = '#9cc65b';
 const StyledCard = styled(Card)<StyledCardProps>`
   flex: 1;
   height: ${NORMAL_CARD_HEIGHT};
-  background-color: ${(props) => (props.cardType === 'building'
+  background-color: ${(props) => (props.cardtype === 'building'
     ? props.theme.colors.building
     : props.theme.colors.idle
   )};
@@ -75,7 +75,7 @@ const IdleIcon = styled(HourglassFilled)`
 const capitalizeFirstLetter = (str: string): string => str.charAt(0).toUpperCase() + str.slice(1);
 
 const AvailabilityBox: React.FC<Props> = ({ type, number }) => (
-  <StyledCard cardType={type}>
+  <StyledCard cardtype={type}>
     <TitleWrapper>{capitalizeFirstLetter(type)}</TitleWrapper>
     {type === 'building' ? <BuildingIcon /> : <IdleIcon />}
     <NumberWrapper>{number}</NumberWrapper>
