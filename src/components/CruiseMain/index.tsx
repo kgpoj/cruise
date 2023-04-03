@@ -13,7 +13,7 @@ const {
 } = Layout;
 
 const StyledMain = styled(Layout)`
-  margin: 0 150px;
+  margin: 0 20%;
   @media (max-width: 992px) {
     margin: 0;
   }
@@ -22,6 +22,16 @@ const StyledMain = styled(Layout)`
 const StyledContent = styled(Content)`
   padding-top: 20px;
   padding-left: 40px;
+
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  @media screen and (max-width: 768px) {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
 `;
 
 const CruiseMain = (): JSX.Element => (
