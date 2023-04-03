@@ -24,6 +24,10 @@ const theme: DefaultTheme = {
   heights: {
     normalCard: '100px',
     smallCard: '90px',
+    header: '60px',
+  },
+  widths: {
+    sider: '250px',
   },
 };
 

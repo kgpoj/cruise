@@ -13,24 +13,29 @@ const {
 } = Layout;
 
 const StyledMain = styled(Layout)`
-  margin: 0;
+  overflow: auto;
+  height: ${({ theme }) => `calc(100vh - ${theme.heights.header})`};
+  padding: 0;
   ${({ theme }) => theme.mediaQueries.isDesktop} {
-    margin: 0 20%;
+    padding: 0 20%;
   }
 `;
 
 const StyledContent = styled(Content)`
   padding-top: 20px;
   padding-left: 40px;
+  margin-left: ${({ theme }) => theme.widths.sider};
   
   ${({ theme }) => theme.mediaQueries.isTablet} {
     padding-left: 10px;
     padding-right: 10px;
+    margin-left: 0;
   }
 
   ${({ theme }) => theme.mediaQueries.isMobile} {
     padding-left: 5px;
     padding-right: 5px;
+    margin-left: 0;
   }
 `;
 

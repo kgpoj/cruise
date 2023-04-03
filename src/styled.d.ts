@@ -20,6 +20,10 @@ declare module 'styled-components' {
     heights: {
       normalCard: string;
       smallCard: string;
+      header: string;
+    };
+    widths: {
+      sider: string;
     }
   }
 }
