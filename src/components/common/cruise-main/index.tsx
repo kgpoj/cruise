@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import { Layout } from 'antd';
 import styled from 'styled-components';
 import Dashboard from '../../../pages/dashboard';
-import Agent from '../../../pages/agent';
+import Agent from '../../agent';
 import MyCruise from '../../../pages/my-cruise';
 import Help from '../../../pages/help';
 import CruiseMenu from './cruise-menu';
