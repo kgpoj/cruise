@@ -6,7 +6,7 @@ export interface ContextValues {
   data: Agent[];
 }
 
-const AgentsContext = createContext({} as ContextValues);
+export const AgentsContext = createContext({} as ContextValues);
 
 interface Props {
   children: React.ReactNode;

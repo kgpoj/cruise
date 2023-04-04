@@ -4,14 +4,14 @@ import userEvent from '@testing-library/user-event';
 import Agent from './index';
 import mockAgentsData from '../../mock/mockAgentsData';
 import renderWithGlobalWrapper from '../../utils/testUtils';
-import { AgentsContextProvider } from '../../hooks/useAgentsContext';
+import MockedAgentsContextProvider from '../../utils/MockedAgentsContextProvider';
 
 describe('Agent', () => {
   it('should render correctly', () => {
     renderWithGlobalWrapper(
-      <AgentsContextProvider>
+      <MockedAgentsContextProvider>
         <Agent />
-      </AgentsContextProvider>,
+      </MockedAgentsContextProvider>,
     );
 
     mockAgentsData.map((agent) => agent.name).forEach((name) => {
@@ -21,9 +21,9 @@ describe('Agent', () => {
 
   it('should filter correctly', () => {
     renderWithGlobalWrapper(
-      <AgentsContextProvider>
+      <MockedAgentsContextProvider>
         <Agent />
-      </AgentsContextProvider>,
+      </MockedAgentsContextProvider>,
     );
 
     waitFor(() => {
