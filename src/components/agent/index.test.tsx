@@ -4,10 +4,15 @@ import userEvent from '@testing-library/user-event';
 import Agent from './index';
 import mockAgentsData from '../../mock/mockAgentsData';
 import renderWithGlobalWrapper from '../../utils/testUtils';
+import { AgentsContextProvider } from '../../hooks/useAgentsContext';
 
 describe('Agent', () => {
   it('should render correctly', () => {
-    renderWithGlobalWrapper(<Agent />);
+    renderWithGlobalWrapper(
+      <AgentsContextProvider>
+        <Agent />
+      </AgentsContextProvider>,
+    );
 
     mockAgentsData.map((agent) => agent.name).forEach((name) => {
       expect(screen.getByText(name)).toBeInTheDocument();
@@ -15,7 +20,11 @@ describe('Agent', () => {
   });
 
   it('should filter correctly', () => {
-    renderWithGlobalWrapper(<Agent />);
+    renderWithGlobalWrapper(
+      <AgentsContextProvider>
+        <Agent />
+      </AgentsContextProvider>,
+    );
 
     waitFor(() => {
       userEvent.click(screen.getByRole('radio', { name: 'Virtual' }));
