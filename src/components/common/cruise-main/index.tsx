@@ -3,10 +3,10 @@ import { Route, Routes } from 'react-router-dom';
 import { Layout } from 'antd';
 import styled from 'styled-components';
 import Dashboard from '../../../pages/dashboard';
-import Agent from '../../agent';
 import MyCruise from '../../../pages/my-cruise';
 import Help from '../../../pages/help';
 import CruiseMenu from './cruise-menu';
+import AgentPage from '../../../pages/agent';
 
 const {
   Content,
@@ -45,7 +45,7 @@ const CruiseMain = (): JSX.Element => (
     <StyledContent>
       <Routes>
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/agent" element={<Agent />} />
+        <Route path="/agent" element={<AgentPage />} />
         <Route path="/my-cruise" element={<MyCruise />} />
         <Route path="/help" element={<Help />} />
       </Routes>
