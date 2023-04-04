@@ -85,7 +85,7 @@ const mockAgentsData: Agent[] = [
     id: '5',
     name: 'Agent 5',
     iconUrl: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50',
-    ipAddress: '',
+    ipAddress: '192.168.1.106',
     availability: 'building',
     agentType: 'physical',
     resources: [],
@@ -94,7 +94,7 @@ const mockAgentsData: Agent[] = [
     id: '6',
     name: 'Agent 6',
     iconUrl: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50',
-    ipAddress: '',
+    ipAddress: '192.168.1.107',
     availability: 'idle',
     agentType: 'virtual',
     resources: [
@@ -108,7 +108,7 @@ const mockAgentsData: Agent[] = [
     id: '7',
     name: 'Agent 7',
     iconUrl: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50',
-    ipAddress: '',
+    ipAddress: '192.168.1.108',
     availability: 'building',
     agentType: 'physical',
     resources: [
@@ -122,7 +122,7 @@ const mockAgentsData: Agent[] = [
     id: '8',
     name: 'Agent 8',
     iconUrl: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50',
-    ipAddress: '',
+    ipAddress: '192.168.1.109',
     availability: 'idle',
     agentType: 'virtual',
     resources: [
