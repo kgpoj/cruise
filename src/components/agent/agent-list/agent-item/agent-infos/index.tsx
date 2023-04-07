@@ -18,11 +18,20 @@ const Infos = styled.div`
   display: flex;
   justify-content: flex-start;
   column-gap: 20px;
+  row-gap: 5px;
+  
+  ${({ theme }) => theme.mediaQueries.isMobile} {
+    flex-direction: column;
+  }
+`;
+
+const Name = styled.div`
+  color: ${({ theme }) => theme.colors.primary};
+  font-weight: bold;
 `;
 
 const InfoItem = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
   column-gap: 5px;
 `;
@@ -30,13 +39,17 @@ const InfoItem = styled.div`
 const StyledTag = styled(Tag)<StyledTagProps>`
   background-color: ${({ type, theme }) => theme.colors[type]};
   color: white;
+
+  ${({ theme }) => theme.mediaQueries.isMobile} {
+    display: none;
+  }
 `;
 
 const AgentInfos: React.FC<AgentInfosProps> = ({ ipAddress, name, availability }) => (
   <Infos>
     <InfoItem>
       <DesktopOutlined />
-      {name}
+      <Name>{name}</Name>
     </InfoItem>
     <StyledTag type={availability}>{availability}</StyledTag>
     <InfoItem>

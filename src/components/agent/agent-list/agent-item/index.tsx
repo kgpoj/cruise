@@ -21,6 +21,14 @@ const StyledListItem = styled(List.Item)`
   padding: 10px !important;
 `;
 
+const StyledAvatar = styled(Avatar)`
+  display: none;
+
+  ${({ theme }) => theme.mediaQueries.isDesktop} {
+    display: block;
+  }
+`;
+
 const Content = styled.div`
   display: flex;
   flex-direction: column;
@@ -36,7 +44,7 @@ const AgentItem: React.FC<AgentItemProps> = ({
   resources,
 }) => (
   <StyledListItem>
-    <Avatar src={iconUrl} size="large" />
+    <StyledAvatar src={iconUrl} size="large" />
     <Content>
       <AgentInfos ipAddress={ipAddress} name={name} availability={availability} />
       <AgentActions resources={resources} availability={availability} />

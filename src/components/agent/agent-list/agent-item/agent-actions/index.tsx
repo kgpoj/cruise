@@ -12,6 +12,11 @@ const Actions = styled.div`
   display: flex;
   justify-content: space-between;
   column-gap: 10px;
+  row-gap: 10px;
+
+  ${({ theme }) => theme.mediaQueries.isMobile} {
+    flex-direction: column;
+  }
 `;
 
 const StyledButton = styled.button`
@@ -22,6 +27,12 @@ const StyledButton = styled.button`
   align-items: center;
   column-gap: 10px;
   padding: 5px 10px;
+  width: fit-content;
+  height: fit-content;
+`;
+
+const DenyButton = styled(StyledButton)`
+  align-self: flex-end;
 `;
 
 const ResourcesWrapper = styled.div`
@@ -31,30 +42,40 @@ const ResourcesWrapper = styled.div`
   column-gap: 10px;
 `;
 
+const ResourceItemsWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 10px;
+  row-gap: 10px;
+`;
+
 const ResourceItem = styled.div`
   background-color: #f5f5f5;
   padding: 0 3px;
   display: flex;
   column-gap: 5px;
   align-items: center;
+  font-size: ${({ theme }) => theme.fontSizes.normal};
 `;
 
 const AgentActions: React.FC<AgentActionsProps> = ({ resources, availability }) => (
   <Actions>
     <ResourcesWrapper>
       <StyledButton>+</StyledButton>
-      {resources.map((resource) => (
-        <ResourceItem key={resource.id}>
-          {resource.name}
-          <DeleteOutlined />
-        </ResourceItem>
-      ))}
+      <ResourceItemsWrapper>
+        {resources.map((resource) => (
+          <ResourceItem key={resource.id}>
+            {resource.name}
+            <DeleteOutlined />
+          </ResourceItem>
+        ))}
+      </ResourceItemsWrapper>
     </ResourcesWrapper>
     {availability === 'building' && (
-      <StyledButton>
+      <DenyButton>
         <StopOutlined />
         Deny
-      </StyledButton>
+      </DenyButton>
     )}
   </Actions>
 );
