@@ -1,12 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Avatar, List } from 'antd';
-import {
-  DeleteOutlined,
-  StopOutlined,
-} from '@ant-design/icons';
 import { Availability, Resource } from '../../../../interface/Agent';
 import AgentInfos from './agent-infos';
+import AgentActions from './agent-actions';
 
 interface AgentItemProps {
   iconUrl: string,
@@ -31,37 +28,6 @@ const Content = styled.div`
   row-gap: 20px;
 `;
 
-const Actions = styled.div`
-  display: flex;
-  justify-content: space-between;
-  column-gap: 10px;
-`;
-
-const StyledButton = styled.button`
-  background-color: ${({ theme }) => theme.colors.primary};
-  color: white;
-  border: none;
-  display: flex;
-  align-items: center;
-  column-gap: 10px;
-  padding: 5px 10px;
-`;
-
-const ResourcesWrapper = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  flex: 1;
-  column-gap: 10px;
-`;
-
-const ResourceItem = styled.div`
-  background-color: #f5f5f5;
-  padding: 0 3px;
-  display: flex;
-  column-gap: 5px;
-  align-items: center;
-`;
-
 const AgentItem: React.FC<AgentItemProps> = ({
   iconUrl,
   name,
@@ -73,23 +39,7 @@ const AgentItem: React.FC<AgentItemProps> = ({
     <Avatar src={iconUrl} size="large" />
     <Content>
       <AgentInfos ipAddress={ipAddress} name={name} availability={availability} />
-      <Actions>
-        <ResourcesWrapper>
-          <StyledButton>+</StyledButton>
-          {resources.map((resource) => (
-            <ResourceItem key={resource.id}>
-              {resource.name}
-              <DeleteOutlined />
-            </ResourceItem>
-          ))}
-        </ResourcesWrapper>
-        {availability === 'building' && (
-          <StyledButton>
-            <StopOutlined />
-            Deny
-          </StyledButton>
-        )}
-      </Actions>
+      <AgentActions resources={resources} availability={availability} />
     </Content>
   </StyledListItem>
 );
