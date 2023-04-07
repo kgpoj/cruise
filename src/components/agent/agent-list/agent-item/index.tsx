@@ -19,6 +19,7 @@ const StyledListItem = styled(List.Item)`
   justify-content: space-around;
   column-gap: 20px;
   padding: 10px !important;
+  position: relative;
 `;
 
 const StyledAvatar = styled(Avatar)`
@@ -34,6 +35,10 @@ const Content = styled.div`
   flex-direction: column;
   flex: 1;
   row-gap: 20px;
+
+  ${({ theme }) => theme.mediaQueries.isMobile} {
+    margin-left: 5px;
+  }
 `;
 
 const AgentItem: React.FC<AgentItemProps> = ({

@@ -41,7 +41,13 @@ const StyledTag = styled(Tag)<StyledTagProps>`
   color: white;
 
   ${({ theme }) => theme.mediaQueries.isMobile} {
-    display: none;
+    width: 5px;
+    height: 100%;
+    padding: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: transparent;
   }
 `;
 
