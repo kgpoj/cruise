@@ -1,13 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Avatar, List, Tag } from 'antd';
+import { Avatar, List } from 'antd';
 import {
   DeleteOutlined,
-  DesktopOutlined,
-  FolderOutlined,
-  InfoCircleOutlined, StopOutlined,
+  StopOutlined,
 } from '@ant-design/icons';
 import { Availability, Resource } from '../../../../interface/Agent';
+import AgentInfos from './agent-infos';
 
 interface AgentItemProps {
   iconUrl: string,
@@ -15,10 +14,6 @@ interface AgentItemProps {
   availability: Availability,
   ipAddress: string,
   resources: Resource[],
-}
-
-interface StyledTagProps {
-  type: Availability,
 }
 
 const StyledListItem = styled(List.Item)`
@@ -34,24 +29,6 @@ const Content = styled.div`
   flex-direction: column;
   flex: 1;
   row-gap: 20px;
-`;
-
-const Infos = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  column-gap: 20px;
-`;
-
-const InfoItem = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  column-gap: 5px;
-`;
-
-const StyledTag = styled(Tag)<StyledTagProps>`
-  background-color: ${({ type, theme }) => theme.colors[type]};
-  color: white;
 `;
 
 const Actions = styled.div`
@@ -95,21 +72,7 @@ const AgentItem: React.FC<AgentItemProps> = ({
   <StyledListItem>
     <Avatar src={iconUrl} size="large" />
     <Content>
-      <Infos>
-        <InfoItem>
-          <DesktopOutlined />
-          {name}
-        </InfoItem>
-        <StyledTag type={availability}>{availability}</StyledTag>
-        <InfoItem>
-          <InfoCircleOutlined />
-          {ipAddress}
-        </InfoItem>
-        <InfoItem>
-          <FolderOutlined />
-          /var/lib/cruise-agent
-        </InfoItem>
-      </Infos>
+      <AgentInfos ipAddress={ipAddress} name={name} availability={availability} />
       <Actions>
         <ResourcesWrapper>
           <StyledButton>+</StyledButton>
