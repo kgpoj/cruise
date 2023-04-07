@@ -2,26 +2,26 @@ import React from 'react';
 import { Card } from 'antd';
 import styled from 'styled-components';
 import { HourglassFilled, SettingFilled } from '@ant-design/icons';
-import { Availability } from '../../../../interface/Agent';
-import {
-  BUILDING_COLOR, BUILDING_ICON_COLOR,
-  IDLE_COLOR, IDLE_ICON_COLOR,
-  LARGE_FONT_SIZE, NORMAL_CARD_HEIGHT,
-  NORMAL_FONT_SIZE, SMALL_CARD_HEIGHT,
-} from '../../../../constants/styles';
+import { Availability } from '../../../interface/Agent';
 
 interface Props {
   type: Availability;
   number: number;
 }
 interface StyledCardProps {
-  cardType: Availability
+  cardtype: Availability
 }
+
+const BUILDING_ICON_COLOR = '#f6c44e';
+const IDLE_ICON_COLOR = '#9cc65b';
 
 const StyledCard = styled(Card)<StyledCardProps>`
   flex: 1;
-  height: ${NORMAL_CARD_HEIGHT};
-  background-color: ${(props) => (props.cardType === 'building' ? BUILDING_COLOR : IDLE_COLOR)};
+  height: ${({ theme }) => theme.heights.normalCard};
+  background-color: ${(props) => (props.cardtype === 'building'
+    ? props.theme.colors.building
+    : props.theme.colors.idle
+  )};
   border: none;
   border-radius: 0;
   padding: 0;
@@ -30,8 +30,8 @@ const StyledCard = styled(Card)<StyledCardProps>`
   align-items: center;
   justify-content: center;
   
-  @media (max-width: 768px) {
-    height: ${SMALL_CARD_HEIGHT};
+  ${({ theme }) => theme.mediaQueries.isMobile} {
+    height: ${({ theme }) => theme.heights.smallCard};
   }
 `;
 
@@ -41,7 +41,7 @@ const TitleWrapper = styled.div`
   left: 10px;
   background-color: transparent;
   color: white;
-  font-size: ${NORMAL_FONT_SIZE};
+  font-size: ${(props) => props.theme.fontSizes.normal};
   font-weight: bold;
 `;
 
@@ -50,30 +50,30 @@ const NumberWrapper = styled.div`
   bottom: 5px;
   right: 20px;
   color: white;
-  font-size: ${LARGE_FONT_SIZE};
+  font-size: ${(props) => props.theme.fontSizes.large};
 `;
 
 const BuildingIcon = styled(SettingFilled)`
-  font-size: ${NORMAL_CARD_HEIGHT};
+  font-size: ${({ theme }) => theme.heights.normalCard};
   color: ${BUILDING_ICON_COLOR};
   
-  @media (max-width: 768px) {
-    font-size: ${SMALL_CARD_HEIGHT};
+  ${({ theme }) => theme.mediaQueries.isMobile} {
+    font-size: ${({ theme }) => theme.heights.smallCard};
   }
 `;
 
 const IdleIcon = styled(HourglassFilled)`
-  font-size: ${NORMAL_CARD_HEIGHT};
+  font-size: ${({ theme }) => theme.heights.normalCard};
   color: ${IDLE_ICON_COLOR};
   
-  @media (max-width: 768px) {
-    font-size: ${SMALL_CARD_HEIGHT};
+  ${({ theme }) => theme.mediaQueries.isMobile} {
+    font-size: ${({ theme }) => theme.heights.smallCard};
   }
 `;
 const capitalizeFirstLetter = (str: string): string => str.charAt(0).toUpperCase() + str.slice(1);
 
 const AvailabilityBox: React.FC<Props> = ({ type, number }) => (
-  <StyledCard cardType={type}>
+  <StyledCard cardtype={type}>
     <TitleWrapper>{capitalizeFirstLetter(type)}</TitleWrapper>
     {type === 'building' ? <BuildingIcon /> : <IdleIcon />}
     <NumberWrapper>{number}</NumberWrapper>

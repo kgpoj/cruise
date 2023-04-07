@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import CruiseContextProvider from './store/CruiseContextProvider';
-import CruiseHeader from './components/CruiseHeader';
-import CruiseMain from './components/CruiseMain';
+import CruiseHeader from './components/common/cruise-header';
+import CruiseMain from './components/common/cruise-main';
 
 const App: React.FC = () => (
   <Router>

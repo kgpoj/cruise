@@ -2,13 +2,19 @@ import React, { useState } from 'react';
 import { BarsOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { Button, Drawer, Layout } from 'antd';
-import MenuContent from './components/MenuContent';
+import MenuContent from './menu-content';
 
 const { Sider } = Layout;
 
 const DesktopOnlySider = styled(Sider)`
-  @media (max-width: 992px) {
-    display: none;
+  position: fixed !important;
+  height: 100% ;
+  max-width: ${({ theme }) => theme.widths.sider} !important;
+  min-width: ${({ theme }) => theme.widths.sider} !important;
+  width: ${({ theme }) => theme.widths.sider} !important;
+  display: none;
+  ${({ theme }) => theme.mediaQueries.isDesktop} {
+    display: block;
   }
 `;
 
@@ -19,7 +25,7 @@ const MobileOnlyButton = styled(Button)`
   left: 5px;
   top: 10px;
   z-index: 2;
-  @media (min-width: 992px) {
+  ${({ theme }) => theme.mediaQueries.isDesktop} {
     display: none;
   }
 
@@ -55,8 +61,6 @@ const CruiseMenu = (): JSX.Element => {
   return (
     <>
       <DesktopOnlySider
-        theme="dark"
-        width={250}
         collapsible={false}
         data-testid="sider"
       >

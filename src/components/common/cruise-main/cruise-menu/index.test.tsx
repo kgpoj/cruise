@@ -1,18 +1,12 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
-import { Router } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import CruiseMenu from './index';
+import renderWithGlobalWrapper from '../../../../utils/testUtils';
 
 describe('CruiseMenu', () => {
-  const history = createMemoryHistory();
   it('should render sider when desktop', () => {
-    render(
-      <Router location={history.location} navigator={history}>
-        <CruiseMenu />
-      </Router>,
-    );
+    renderWithGlobalWrapper(<CruiseMenu />);
     const button = screen.queryByTestId('menu-button');
     const sider = screen.getByTestId('sider');
 
@@ -28,11 +22,7 @@ describe('CruiseMenu', () => {
       'innerWidth',
       { writable: true, configurable: true, value: 200 },
     );
-    render(
-      <Router location={history.location} navigator={history}>
-        <CruiseMenu />
-      </Router>,
-    );
+    renderWithGlobalWrapper(<CruiseMenu />);
     const button = screen.getByTestId('menu-button');
     const sider = screen.getByTestId('sider');
     const drawer = screen.queryByTestId('drawer');
