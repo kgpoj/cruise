@@ -39,6 +39,7 @@ const InfoItem = styled.div`
 const StyledTag = styled(Tag)<StyledTagProps>`
   background-color: ${({ type, theme }) => theme.colors[type]};
   color: white;
+  font-size: inherit;
 
   ${({ theme }) => theme.mediaQueries.isMobile} {
     width: 5px;

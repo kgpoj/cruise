@@ -20,6 +20,7 @@ const StyledListItem = styled(List.Item)`
   column-gap: 20px;
   padding: 10px !important;
   position: relative;
+  font-size: ${({ theme }) => theme.fontSizes.normal};
 `;
 
 const StyledAvatar = styled(Avatar)`

@@ -29,6 +29,7 @@ const StyledButton = styled.button`
   padding: 5px 10px;
   width: fit-content;
   height: fit-content;
+  font-weight: bold;
 `;
 
 const DenyButton = styled(StyledButton)`
@@ -55,7 +56,6 @@ const ResourceItem = styled.div`
   display: flex;
   column-gap: 5px;
   align-items: center;
-  font-size: ${({ theme }) => theme.fontSizes.normal};
 `;
 
 const AgentActions: React.FC<AgentActionsProps> = ({ resources, availability }) => (
