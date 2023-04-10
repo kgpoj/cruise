@@ -15,9 +15,7 @@ interface Props {
 }
 
 export const AgentsContextProvider: React.FC<Props> = ({ children }) => {
-  const { data } = useQuery<GetAgentsResponse>(GET_AGENTS_QUERY, {
-    pollInterval: 1000,
-  });
+  const { data } = useQuery<GetAgentsResponse>(GET_AGENTS_QUERY);
   const exposedValues = useMemo(() => ({ data: data?.agents || [] }), [data]);
 
   return (
