@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {PropsWithChildren} from 'react';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory, MemoryHistory } from 'history';
 import { ThemeProvider } from 'styled-components';
 import { render, RenderOptions } from '@testing-library/react';
 import theme from '../constants/theme';
+import ApolloMockedProvider from './ApolloMockedProvider';
 
 type ConstructorWithHistory = (history?: MemoryHistory) => React.FC;
 type RenderWithWrapper = (
@@ -11,13 +12,20 @@ type RenderWithWrapper = (
   history?: MemoryHistory,
 ) => ReturnType<typeof render>;
 
-const createWrapper: ConstructorWithHistory = (
+export const GlobalWrapper: React.FC<PropsWithChildren> = ({ children }) => (
+  <ThemeProvider theme={theme}>
+    <ApolloMockedProvider>
+      {children}
+    </ApolloMockedProvider>
+  </ThemeProvider>
+);
+const createGlobalWrapperWithHistory: ConstructorWithHistory = (
   history = createMemoryHistory(),
 ) => ({ children }: React.PropsWithChildren): JSX.Element => (
   <Router location={history.location} navigator={history}>
-    <ThemeProvider theme={theme}>
+    <GlobalWrapper>
       {children}
-    </ThemeProvider>
+    </GlobalWrapper>
   </Router>
 );
 
@@ -26,7 +34,7 @@ const renderWithGlobalWrapper: RenderWithWrapper = (
   history?,
   options?: RenderOptions,
 ) => render(children, {
-  wrapper: createWrapper(history),
+  wrapper: createGlobalWrapperWithHistory(history),
   ...options,
 });
 export default renderWithGlobalWrapper;
