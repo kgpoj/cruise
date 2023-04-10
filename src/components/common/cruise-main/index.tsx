@@ -16,9 +16,12 @@ const StyledMain = styled(Layout)`
   overflow: auto;
   height: ${({ theme }) => `calc(100vh - ${theme.heights.header})`};
   padding: 0;
-  ${({ theme }) => theme.mediaQueries.isDesktop} {
-    padding: 0 20%;
-  }
+`;
+
+const MainContainer = styled.div`
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
 `;
 
 const StyledContent = styled(Content)`
@@ -41,15 +44,17 @@ const StyledContent = styled(Content)`
 
 const CruiseMain = (): JSX.Element => (
   <StyledMain>
-    <CruiseMenu />
-    <StyledContent>
-      <Routes>
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/agent" element={<AgentPage />} />
-        <Route path="/my-cruise" element={<MyCruise />} />
-        <Route path="/help" element={<Help />} />
-      </Routes>
-    </StyledContent>
+    <MainContainer>
+      <CruiseMenu />
+      <StyledContent>
+        <Routes>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/agent" element={<AgentPage />} />
+          <Route path="/my-cruise" element={<MyCruise />} />
+          <Route path="/help" element={<Help />} />
+        </Routes>
+      </StyledContent>
+    </MainContainer>
   </StyledMain>
 );
 export default CruiseMain;
