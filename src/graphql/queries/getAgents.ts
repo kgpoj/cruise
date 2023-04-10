@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-const AGENTS_QUERY = gql`
+const GET_AGENTS_QUERY = gql`
     query getAgents{
         agents {
             id
@@ -17,4 +17,4 @@ const AGENTS_QUERY = gql`
     }
 `;
 
-export default AGENTS_QUERY;
+export default GET_AGENTS_QUERY;
