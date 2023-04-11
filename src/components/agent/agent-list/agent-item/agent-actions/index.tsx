@@ -3,7 +3,7 @@ import { DeleteOutlined, StopOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { Availability, Resource } from '../../../../../interface/Agent';
 
-interface AgentActionsProps {
+export interface AgentActionsProps {
   resources: Resource[],
   availability: Availability,
 }
@@ -58,6 +58,15 @@ const ResourceItem = styled.div`
   align-items: center;
 `;
 
+const StyledTrashIcon = styled(DeleteOutlined)`
+  cursor: pointer;
+  transition: color 0.3s;
+  
+  &:hover {
+    color: red;
+  }
+`;
+
 const AgentActions: React.FC<AgentActionsProps> = ({ resources, availability }) => (
   <Actions>
     <ResourcesWrapper>
@@ -66,7 +75,7 @@ const AgentActions: React.FC<AgentActionsProps> = ({ resources, availability }) 
         {resources.map((resource) => (
           <ResourceItem key={resource.id}>
             {resource.name}
-            <DeleteOutlined />
+            <StyledTrashIcon data-testid="trash-icon" />
           </ResourceItem>
         ))}
       </ResourceItemsWrapper>
