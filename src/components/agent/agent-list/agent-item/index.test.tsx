@@ -8,6 +8,7 @@ const buildingItem = mockAgentsData.filter((item) => item.availability === 'buil
 const idleItem = mockAgentsData.filter((item) => item.availability === 'idle')[0];
 const renderBuildingItem = (): RenderResult => renderWithGlobalWrapper(
   <AgentItem
+    id={buildingItem.id}
     name={buildingItem.name}
     resources={buildingItem.resources}
     availability={buildingItem.availability}
@@ -18,6 +19,7 @@ const renderBuildingItem = (): RenderResult => renderWithGlobalWrapper(
 
 const renderIdleItem = (): RenderResult => renderWithGlobalWrapper(
   <AgentItem
+    id={idleItem.id}
     name={idleItem.name}
     resources={idleItem.resources}
     availability={idleItem.availability}
