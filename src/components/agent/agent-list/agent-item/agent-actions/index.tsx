@@ -72,26 +72,34 @@ const AgentActions: React.FC<AgentActionsProps> = ({
   resources,
   availability,
   onResourceDelete,
-}) => (
-  <Actions>
-    <ResourcesWrapper>
-      <StyledButton>+</StyledButton>
-      <ResourceItemsWrapper>
-        {resources.map((resource) => (
-          <ResourceItem key={resource.id}>
-            {resource.name}
-            <StyledTrashIcon data-testid="trash-icon" onClick={() => onResourceDelete(resource.id)} />
-          </ResourceItem>
-        ))}
-      </ResourceItemsWrapper>
-    </ResourcesWrapper>
-    {availability === 'building' && (
-      <DenyButton>
-        <StopOutlined />
-        Deny
-      </DenyButton>
-    )}
-  </Actions>
-);
+}) => {
+  const getResourceItem = (resource: Resource): JSX.Element => {
+    const handleTrashClick = (): void => onResourceDelete(resource.id);
+
+    return (
+      <ResourceItem key={resource.id}>
+        {resource.name}
+        <StyledTrashIcon data-testid="trash-icon" onClick={handleTrashClick} />
+      </ResourceItem>
+    );
+  };
+
+  return (
+    <Actions>
+      <ResourcesWrapper>
+        <StyledButton>+</StyledButton>
+        <ResourceItemsWrapper>
+          {resources.map((resource) => getResourceItem(resource))}
+        </ResourceItemsWrapper>
+      </ResourcesWrapper>
+      {availability === 'building' && (
+        <DenyButton>
+          <StopOutlined />
+          Deny
+        </DenyButton>
+      )}
+    </Actions>
+  );
+};
 
 export default AgentActions;
