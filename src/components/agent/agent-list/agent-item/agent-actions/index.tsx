@@ -6,6 +6,7 @@ import { Availability, Resource } from '../../../../../interface/Agent';
 export interface AgentActionsProps {
   resources: Resource[],
   availability: Availability,
+  onResourceDelete: (resourceId: string) => void
 }
 
 const Actions = styled.div`
@@ -67,7 +68,11 @@ const StyledTrashIcon = styled(DeleteOutlined)`
   }
 `;
 
-const AgentActions: React.FC<AgentActionsProps> = ({ resources, availability }) => (
+const AgentActions: React.FC<AgentActionsProps> = ({
+  resources,
+  availability,
+  onResourceDelete,
+}) => (
   <Actions>
     <ResourcesWrapper>
       <StyledButton>+</StyledButton>
@@ -75,7 +80,7 @@ const AgentActions: React.FC<AgentActionsProps> = ({ resources, availability }) 
         {resources.map((resource) => (
           <ResourceItem key={resource.id}>
             {resource.name}
-            <StyledTrashIcon data-testid="trash-icon" />
+            <StyledTrashIcon data-testid="trash-icon" onClick={() => onResourceDelete(resource.id)} />
           </ResourceItem>
         ))}
       </ResourceItemsWrapper>

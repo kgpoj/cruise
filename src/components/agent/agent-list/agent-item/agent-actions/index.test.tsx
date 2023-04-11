@@ -1,6 +1,7 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
 import 'jest-styled-components';
+import userEvent from '@testing-library/user-event';
 import AgentActions, { AgentActionsProps } from './index';
 import { renderWithThemeWrapper } from '../../../../../utils/testUtils';
 import { Availability, Resource } from '../../../../../interface/Agent';
@@ -27,11 +28,13 @@ describe('AgentActions', () => {
     },
   ];
   const mockAvailability: Availability = 'idle';
+  const mockOnResourceDelete = jest.fn();
   const wrapper: WrapperFunc = (props?: AgentActionsProps) => {
     renderWithThemeWrapper(
       <AgentActions
         resources={mockResources}
         availability={mockAvailability}
+        onResourceDelete={mockOnResourceDelete}
         {...props}
       />,
     );
@@ -62,5 +65,11 @@ describe('AgentActions', () => {
     expect(trashIcon).toHaveStyleRule('color', 'red', {
       modifier: ':hover',
     });
+  });
+
+  it('should call onResourceDelete when click trash icon', () => {
+    const trashIcon = screen.getAllByTestId('trash-icon')[0];
+    userEvent.click(trashIcon);
+    expect(mockOnResourceDelete).toHaveBeenCalledWith(mockResources[0].id);
   });
 });

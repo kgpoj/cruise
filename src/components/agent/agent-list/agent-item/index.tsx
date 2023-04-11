@@ -11,6 +11,7 @@ interface AgentItemProps {
   availability: Availability,
   ipAddress: string,
   resources: Resource[],
+  id: string,
 }
 
 const StyledListItem = styled(List.Item)`
@@ -48,14 +49,25 @@ const AgentItem: React.FC<AgentItemProps> = ({
   availability,
   ipAddress,
   resources,
-}) => (
-  <StyledListItem>
-    <StyledAvatar src={iconUrl} size="large" />
-    <Content>
-      <AgentInfos ipAddress={ipAddress} name={name} availability={availability} />
-      <AgentActions resources={resources} availability={availability} />
-    </Content>
-  </StyledListItem>
-);
+  id: AgentId,
+}) => {
+  const handleResourceDelete = (resourceId: string): void => {
+    console.log(`delete resource with id: ${resourceId}, of agent with id: ${AgentId}`);
+  };
+
+  return (
+    <StyledListItem>
+      <StyledAvatar src={iconUrl} size="large" />
+      <Content>
+        <AgentInfos ipAddress={ipAddress} name={name} availability={availability} />
+        <AgentActions
+          resources={resources}
+          availability={availability}
+          onResourceDelete={handleResourceDelete}
+        />
+      </Content>
+    </StyledListItem>
+  );
+};
 
 export default AgentItem;
