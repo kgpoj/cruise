@@ -74,6 +74,22 @@ const StyledTrashIcon = styled(DeleteOutlined)`
   }
 `;
 
+const StyledPopover = styled(Popover)`
+  position: relative;
+`;
+
+const XButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background-color: transparent;
+  border: none;
+  font-weight: bold;
+  padding: 0;
+  cursor: pointer;
+  color: ${({ theme }) => theme.colors.primary};
+`;
+
 const AgentActions: React.FC<AgentActionsProps> = ({
   resources,
   availability,
@@ -91,6 +107,11 @@ const AgentActions: React.FC<AgentActionsProps> = ({
 
   const content = (
     <div>
+      <XButton
+        onClick={handleCancelClick}
+      >
+        X
+      </XButton>
       <p>Separate multiple resource name with commas</p>
       <CancelButton onClick={handleCancelClick}>Cancel</CancelButton>
     </div>
@@ -109,7 +130,7 @@ const AgentActions: React.FC<AgentActionsProps> = ({
   return (
     <Actions>
       <ResourcesWrapper>
-        <Popover
+        <StyledPopover
           placement="bottomLeft"
           content={content}
           trigger="click"
@@ -117,7 +138,7 @@ const AgentActions: React.FC<AgentActionsProps> = ({
           onOpenChange={handleOpenChange}
         >
           <StyledButton>+</StyledButton>
-        </Popover>
+        </StyledPopover>
         <ResourceItemsWrapper>
           {resources.map((resource) => getResourceItem(resource))}
         </ResourceItemsWrapper>

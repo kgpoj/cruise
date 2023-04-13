@@ -88,4 +88,14 @@ describe('AgentActions', () => {
       .not
       .toBeVisible();
   });
+
+  it('should hide popover when click x button', () => {
+    const addResourceButton = screen.getByRole('button', { name: '+' });
+    userEvent.click(addResourceButton);
+    const xButton = screen.getByRole('button', { name: 'X' });
+    userEvent.click(xButton);
+    expect(screen.getByText('Separate multiple resource name with commas'))
+      .not
+      .toBeVisible();
+  });
 });
