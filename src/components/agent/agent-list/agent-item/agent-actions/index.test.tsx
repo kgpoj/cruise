@@ -72,4 +72,10 @@ describe('AgentActions', () => {
     userEvent.click(trashIcon);
     expect(mockOnResourceDelete).toHaveBeenCalledWith(mockResources[0].id);
   });
+
+  it('should show popover when click add resource button', () => {
+    const addResourceButton = screen.getByRole('button', { name: '+' });
+    userEvent.click(addResourceButton);
+    expect(screen.getByText('Separate multiple resource name with commas')).toBeVisible();
+  });
 });

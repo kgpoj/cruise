@@ -1,6 +1,7 @@
 import React from 'react';
 import { DeleteOutlined, StopOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
+import { Popover } from 'antd';
 import { Availability, Resource } from '../../../../../interface/Agent';
 
 export interface AgentActionsProps {
@@ -21,6 +22,7 @@ const Actions = styled.div`
 `;
 
 const StyledButton = styled.button`
+  cursor: pointer;
   background-color: ${({ theme }) => theme.colors.primary};
   color: white;
   border: none;
@@ -68,6 +70,11 @@ const StyledTrashIcon = styled(DeleteOutlined)`
   }
 `;
 
+const content = (
+  <div>
+    <p>Separate multiple resource name with commas</p>
+  </div>
+);
 const AgentActions: React.FC<AgentActionsProps> = ({
   resources,
   availability,
@@ -87,7 +94,9 @@ const AgentActions: React.FC<AgentActionsProps> = ({
   return (
     <Actions>
       <ResourcesWrapper>
-        <StyledButton>+</StyledButton>
+        <Popover placement="bottomLeft" content={content} trigger="click">
+          <StyledButton>+</StyledButton>
+        </Popover>
         <ResourceItemsWrapper>
           {resources.map((resource) => getResourceItem(resource))}
         </ResourceItemsWrapper>
