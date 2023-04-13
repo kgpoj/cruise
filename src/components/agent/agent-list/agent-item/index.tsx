@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Avatar, List } from 'antd';
+import { gql, useMutation } from '@apollo/client';
 import { Availability, Resource } from '../../../../interface/Agent';
 import AgentInfos from './agent-infos';
 import AgentActions from './agent-actions';
@@ -43,16 +44,40 @@ const Content = styled.div`
   }
 `;
 
+export const REMOVE_RESOURCE_MUTATION = gql`
+  mutation removeResource($agentId: String!, $resourceId: String!) {
+    removeResource(agentId: $agentId, resourceId: $resourceId) {
+        id
+        name
+        iconUrl
+        ipAddress
+        availability
+        agentType
+        resources {
+            id
+            name
+        }
+    }
+  }
+`;
+
 const AgentItem: React.FC<AgentItemProps> = ({
   iconUrl,
   name,
   availability,
   ipAddress,
   resources,
-  id: AgentId,
+  id: agentId,
 }) => {
+  const [removeResource] = useMutation(REMOVE_RESOURCE_MUTATION);
+
   const handleResourceDelete = (resourceId: string): void => {
-    console.log(`delete resource with id: ${resourceId}, of agent with id: ${AgentId}`);
+    removeResource({
+      variables: {
+        agentId,
+        resourceId,
+      },
+    });
   };
 
   return (
