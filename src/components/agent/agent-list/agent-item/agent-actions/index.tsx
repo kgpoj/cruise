@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { DeleteOutlined, StopOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { Popover } from 'antd';
@@ -39,6 +39,10 @@ const DenyButton = styled(StyledButton)`
   align-self: flex-end;
 `;
 
+const CancelButton = styled(StyledButton)`
+  background-color: #485362;
+`;
+
 const ResourcesWrapper = styled.div`
   display: flex;
   justify-content: flex-start;
@@ -64,22 +68,33 @@ const ResourceItem = styled.div`
 const StyledTrashIcon = styled(DeleteOutlined)`
   cursor: pointer;
   transition: color 0.3s;
-  
+
   &:hover {
     color: red;
   }
 `;
 
-const content = (
-  <div>
-    <p>Separate multiple resource name with commas</p>
-  </div>
-);
 const AgentActions: React.FC<AgentActionsProps> = ({
   resources,
   availability,
   onResourceDelete,
 }) => {
+  const [open, setOpen] = useState(false);
+
+  const handleCancelClick = (): void => {
+    setOpen(false);
+  };
+
+  const handleOpenChange = (newOpen: boolean): void => {
+    setOpen(newOpen);
+  };
+
+  const content = (
+    <div>
+      <p>Separate multiple resource name with commas</p>
+      <CancelButton onClick={handleCancelClick}>Cancel</CancelButton>
+    </div>
+  );
   const getResourceItem = (resource: Resource): JSX.Element => {
     const handleTrashClick = (): void => onResourceDelete(resource.id);
 
@@ -94,7 +109,13 @@ const AgentActions: React.FC<AgentActionsProps> = ({
   return (
     <Actions>
       <ResourcesWrapper>
-        <Popover placement="bottomLeft" content={content} trigger="click">
+        <Popover
+          placement="bottomLeft"
+          content={content}
+          trigger="click"
+          open={open}
+          onOpenChange={handleOpenChange}
+        >
           <StyledButton>+</StyledButton>
         </Popover>
         <ResourceItemsWrapper>
