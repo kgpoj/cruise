@@ -78,4 +78,14 @@ describe('AgentActions', () => {
     userEvent.click(addResourceButton);
     expect(screen.getByText('Separate multiple resource name with commas')).toBeVisible();
   });
+
+  it('should hide popover when click cancel button', () => {
+    const addResourceButton = screen.getByRole('button', { name: '+' });
+    userEvent.click(addResourceButton);
+    const cancelButton = screen.getByRole('button', { name: 'Cancel' });
+    userEvent.click(cancelButton);
+    expect(screen.getByText('Separate multiple resource name with commas'))
+      .not
+      .toBeVisible();
+  });
 });
