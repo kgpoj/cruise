@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { DeleteOutlined, StopOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
-import { Popover } from 'antd';
 import { Availability, Resource } from '../../../../../interface/Agent';
 import { StyledButton } from '../../../styles';
+import AddResourcePopover from './add-resource-popover';
 
 export interface AgentActionsProps {
   resources: Resource[],
@@ -24,10 +24,6 @@ const Actions = styled.div`
 
 const DenyButton = styled(StyledButton)`
   align-self: flex-end;
-`;
-
-const CancelButton = styled(StyledButton)`
-  background-color: #485362;
 `;
 
 const ResourcesWrapper = styled.div`
@@ -61,48 +57,11 @@ const StyledTrashIcon = styled(DeleteOutlined)`
   }
 `;
 
-const StyledPopover = styled(Popover)`
-  position: relative;
-`;
-
-const XButton = styled.button`
-  position: absolute;
-  top: 10px;
-  right: 12px;
-  background-color: transparent;
-  border: none;
-  font-weight: bold;
-  padding: 0;
-  cursor: pointer;
-  color: ${({ theme }) => theme.colors.primary};
-`;
-
 const AgentActions: React.FC<AgentActionsProps> = ({
   resources,
   availability,
   onResourceDelete,
 }) => {
-  const [open, setOpen] = useState(false);
-
-  const handleCancelClick = (): void => {
-    setOpen(false);
-  };
-
-  const handleOpenChange = (newOpen: boolean): void => {
-    setOpen(newOpen);
-  };
-
-  const content = (
-    <div>
-      <XButton
-        onClick={handleCancelClick}
-      >
-        X
-      </XButton>
-      <p>Separate multiple resource name with commas</p>
-      <CancelButton onClick={handleCancelClick}>Cancel</CancelButton>
-    </div>
-  );
   const getResourceItem = (resource: Resource): JSX.Element => {
     const handleTrashClick = (): void => onResourceDelete(resource.id);
 
@@ -117,15 +76,9 @@ const AgentActions: React.FC<AgentActionsProps> = ({
   return (
     <Actions>
       <ResourcesWrapper>
-        <StyledPopover
-          placement="bottomLeft"
-          content={content}
-          trigger="click"
-          open={open}
-          onOpenChange={handleOpenChange}
-        >
+        <AddResourcePopover>
           <StyledButton>+</StyledButton>
-        </StyledPopover>
+        </AddResourcePopover>
         <ResourceItemsWrapper>
           {resources.map((resource) => getResourceItem(resource))}
         </ResourceItemsWrapper>
