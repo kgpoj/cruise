@@ -74,29 +74,31 @@ describe('AgentActions', () => {
     expect(mockOnResourceDelete).toHaveBeenCalledWith(mockResources[0].id);
   });
 
-  it('should show popover when click add resource button', () => {
-    const addResourceButton = screen.getByRole('button', { name: '+' });
-    userEvent.click(addResourceButton);
-    expect(screen.getByText(addResourcePopoverText)).toBeVisible();
-  });
+  describe('add resource popover', () => {
+    it('should show popover when click add resource button', () => {
+      const addResourceButton = screen.getByRole('button', { name: '+' });
+      userEvent.click(addResourceButton);
+      expect(screen.getByText(addResourcePopoverText)).toBeVisible();
+    });
 
-  it('should hide popover when click cancel button', () => {
-    const addResourceButton = screen.getByRole('button', { name: '+' });
-    userEvent.click(addResourceButton);
-    const cancelButton = screen.getByRole('button', { name: 'Cancel' });
-    userEvent.click(cancelButton);
-    expect(screen.getByText(addResourcePopoverText))
-      .not
-      .toBeVisible();
-  });
+    it('should hide popover when click cancel button', () => {
+      const addResourceButton = screen.getByRole('button', { name: '+' });
+      userEvent.click(addResourceButton);
+      const cancelButton = screen.getByRole('button', { name: 'Cancel' });
+      userEvent.click(cancelButton);
+      expect(screen.getByText(addResourcePopoverText))
+        .not
+        .toBeVisible();
+    });
 
-  it('should hide popover when click x button', () => {
-    const addResourceButton = screen.getByRole('button', { name: '+' });
-    userEvent.click(addResourceButton);
-    const xButton = screen.getByRole('button', { name: 'X' });
-    userEvent.click(xButton);
-    expect(screen.getByText(addResourcePopoverText))
-      .not
-      .toBeVisible();
+    it('should hide popover when click x button', () => {
+      const addResourceButton = screen.getByRole('button', { name: '+' });
+      userEvent.click(addResourceButton);
+      const xButton = screen.getByRole('button', { name: 'X' });
+      userEvent.click(xButton);
+      expect(screen.getByText(addResourcePopoverText))
+        .not
+        .toBeVisible();
+    });
   });
 });
