@@ -3,6 +3,7 @@ import { DeleteOutlined, StopOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { Popover } from 'antd';
 import { Availability, Resource } from '../../../../../interface/Agent';
+import { StyledButton } from '../../../styles';
 
 export interface AgentActionsProps {
   resources: Resource[],
@@ -19,20 +20,6 @@ const Actions = styled.div`
   ${({ theme }) => theme.mediaQueries.isMobile} {
     flex-direction: column;
   }
-`;
-
-const StyledButton = styled.button`
-  cursor: pointer;
-  background-color: ${({ theme }) => theme.colors.primary};
-  color: white;
-  border: none;
-  display: flex;
-  align-items: center;
-  column-gap: 10px;
-  padding: 5px 10px;
-  width: fit-content;
-  height: fit-content;
-  font-weight: bold;
 `;
 
 const DenyButton = styled(StyledButton)`
