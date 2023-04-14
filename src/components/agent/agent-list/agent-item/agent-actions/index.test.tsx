@@ -10,6 +10,7 @@ type WrapperFunc = (props?: AgentActionsProps) => void;
 
 describe('AgentActions', () => {
   const addResourcePopoverText = 'Separate multiple resource name with commas';
+  const popoverInputPromptText = 'Valid Resources: Firefox, Safari, Ubuntu, Chrome';
   const mockResources: Resource[] = [
     {
       id: '1',
@@ -98,6 +99,13 @@ describe('AgentActions', () => {
       userEvent.click(xButton);
       expect(screen.getByText(addResourcePopoverText))
         .not
+        .toBeVisible();
+    });
+
+    it('should have placeholder text', () => {
+      const addResourceButton = screen.getByRole('button', { name: '+' });
+      userEvent.click(addResourceButton);
+      expect(screen.getByPlaceholderText(popoverInputPromptText))
         .toBeVisible();
     });
   });
