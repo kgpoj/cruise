@@ -1,6 +1,7 @@
 import React from 'react';
-import { Avatar, List } from 'antd';
+import { List } from 'antd';
 import { Agent } from '../../../interface/Agent';
+import AgentItem from './agent-item';
 
 interface AgentListProps {
   dataSource: Agent[]
@@ -11,13 +12,13 @@ const AgentList = ({ dataSource }: AgentListProps): JSX.Element => (
     itemLayout="horizontal"
     dataSource={dataSource}
     renderItem={(item) => (
-      <List.Item>
-        <List.Item.Meta
-          avatar={<Avatar src={item.iconUrl} />}
-          title={item.name}
-          description={`agentType: ${item.agentType}`}
-        />
-      </List.Item>
+      <AgentItem
+        iconUrl={item.iconUrl}
+        name={item.name}
+        availability={item.availability}
+        ipAddress={item.ipAddress}
+        resources={item.resources}
+      />
     )}
   />
 );

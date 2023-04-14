@@ -7,6 +7,8 @@ import renderWithGlobalWrapper from '../../../utils/testUtils';
 describe('AgentList', () => {
   it('should render correctly', () => {
     renderWithGlobalWrapper(<AgentList dataSource={mockAgentsData} />);
-    expect(screen.getByText('Agent 1')).toBeInTheDocument();
+    const listItems = screen.getAllByRole('listitem');
+
+    expect(listItems).toHaveLength(mockAgentsData.length);
   });
 });
