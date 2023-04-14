@@ -9,6 +9,7 @@ import { Availability, Resource } from '../../../../../interface/Agent';
 type WrapperFunc = (props?: AgentActionsProps) => void;
 
 describe('AgentActions', () => {
+  const invalidCharacterError = 'Please enter commas for separation';
   const addResourcePopoverText = 'Separate multiple resource name with commas';
   const popoverInputPromptText = 'Valid Resources: Firefox, Safari, Ubuntu, Chrome';
   const mockResources: Resource[] = [
@@ -107,6 +108,15 @@ describe('AgentActions', () => {
       userEvent.click(addResourceButton);
       expect(screen.getByPlaceholderText(popoverInputPromptText))
         .toBeVisible();
+    });
+
+    it('should show error message when input separator other than ","', () => {
+      const addResourceButton = screen.getByRole('button', { name: '+' });
+      userEvent.click(addResourceButton);
+      const input = screen.getByPlaceholderText(popoverInputPromptText);
+      userEvent.type(input, ';');
+      const errorMessage = screen.getByText(invalidCharacterError);
+      expect(errorMessage).toBeVisible();
     });
   });
 });
