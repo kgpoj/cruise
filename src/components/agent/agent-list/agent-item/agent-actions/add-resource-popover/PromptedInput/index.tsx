@@ -1,14 +1,40 @@
 import React, { useState } from 'react';
 import { Input } from 'antd';
+import styled from 'styled-components';
 
 interface Props {
   candidates: string[];
   separator?: string;
 }
 
+interface HintProps {
+  offset: number;
+}
+
+const INPUT_PADDING_LEFT = 11;
+
+const StyledInput = styled(Input)`
+  font-size: 12px;
+  position: relative;
+  padding-left: ${INPUT_PADDING_LEFT}px;
+  
+  & input {
+    font-family: Monaco, monospace;
+  }
+`;
+
+const Hint = styled.span<HintProps>`
+  font-family: Monaco, monospace;
+  color: #999;
+  position: absolute;
+  left: ${(props) => INPUT_PADDING_LEFT + props.offset}px;
+`;
+
 const PromptedInput: React.FC<Props> = ({ candidates, separator = ',' }) => {
   const [inputValue, setInputValue] = useState('');
   const [hint, setHint] = useState('');
+
+  const offset = 7.2 * inputValue.length;
 
   const candidatesLower = candidates
     .map((candidate) => candidate.toLowerCase())
@@ -36,11 +62,11 @@ const PromptedInput: React.FC<Props> = ({ candidates, separator = ',' }) => {
   };
 
   return (
-    <Input
+    <StyledInput
       value={inputValue}
       onChange={handleChange}
       onKeyDown={handleKeyDown}
-      suffix={<span style={{ color: '#999' }}>{hint}</span>}
+      suffix={<Hint offset={offset}>{hint}</Hint>}
     />
   );
 };
