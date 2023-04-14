@@ -1,10 +1,14 @@
 import React, { PropsWithChildren, useState } from 'react';
 import styled from 'styled-components';
-import { Popover } from 'antd';
+import { Input, Popover } from 'antd';
 import { StyledButton } from '../../../../styles';
 
 const StyledPopover = styled(Popover)`
   position: relative;
+`;
+
+const StyledInput = styled(Input)`
+  font-size: 12px;
 `;
 
 const CancelButton = styled(StyledButton)`
@@ -41,6 +45,7 @@ const AddResourcePopover: React.FC<PropsWithChildren> = ({ children }) => {
         X
       </XButton>
       <p>Separate multiple resource name with commas</p>
+      <StyledInput placeholder="Valid Resources: Firefox, Safari, Ubuntu, Chrome" />
       <CancelButton onClick={handleCancelClick}>Cancel</CancelButton>
     </div>
   );
