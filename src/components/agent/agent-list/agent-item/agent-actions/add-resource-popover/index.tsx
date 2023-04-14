@@ -33,6 +33,8 @@ const ErrorMessage = styled.p`
 `;
 
 const INVALID_CHARACTER = 'Please enter commas for separation';
+const VALID_RESOURCE_PROMPT = 'Valid Resources: Firefox, Safari, Ubuntu, Chrome';
+const VALID_RESOURCES = ['firefox', 'chrome', 'safari', 'ubuntu'];
 const AddResourcePopover: React.FC<PropsWithChildren> = ({ children }) => {
   const [open, setOpen] = useState(false);
   const [error, setError] = useState('');
@@ -45,10 +47,21 @@ const AddResourcePopover: React.FC<PropsWithChildren> = ({ children }) => {
     setOpen(newOpen);
   };
 
+  const isInvalidResource = (input: string): boolean => {
+    const [latestResource, ...previousResources] = input.toLowerCase().split(',').reverse();
+    const previousResourcesInvalid = previousResources
+      .some((resource) => !VALID_RESOURCES.includes(resource));
+    const latestResourceInvalid = !VALID_RESOURCES
+      .some((validResource) => validResource.startsWith(latestResource));
+    return latestResourceInvalid || previousResourcesInvalid;
+  };
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const inputPattern = /^[a-zA-Z,]*$/;
     if (!inputPattern.test(event.target.value)) {
       setError(INVALID_CHARACTER);
+    } else if (isInvalidResource(event.target.value)) {
+      setError(VALID_RESOURCE_PROMPT);
     } else {
       setError('');
     }
@@ -63,7 +76,7 @@ const AddResourcePopover: React.FC<PropsWithChildren> = ({ children }) => {
       </XButton>
       <p>Separate multiple resource name with commas</p>
       <StyledInput
-        placeholder="Valid Resources: Firefox, Safari, Ubuntu, Chrome"
+        placeholder={VALID_RESOURCE_PROMPT}
         onChange={handleInputChange}
         status={error ? 'error' : ''}
       />

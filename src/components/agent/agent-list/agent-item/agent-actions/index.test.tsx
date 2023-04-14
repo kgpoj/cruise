@@ -118,5 +118,14 @@ describe('AgentActions', () => {
       const errorMessage = screen.getByText(invalidCharacterError);
       expect(errorMessage).toBeVisible();
     });
+
+    it('should show error message when input invalid resource', () => {
+      const addResourceButton = screen.getByRole('button', { name: '+' });
+      userEvent.click(addResourceButton);
+      const input = screen.getByPlaceholderText(popoverInputPromptText);
+      userEvent.type(input, 'invalid');
+      const errorMessage = screen.getByText(popoverInputPromptText);
+      expect(errorMessage).toBeVisible();
+    });
   });
 });
