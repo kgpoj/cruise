@@ -9,6 +9,7 @@ import { Availability, Resource } from '../../../../../interface/Agent';
 type WrapperFunc = (props?: AgentActionsProps) => void;
 
 describe('AgentActions', () => {
+  const addResourcePopoverText = 'Separate multiple resource name with commas';
   const mockResources: Resource[] = [
     {
       id: '1',
@@ -76,7 +77,7 @@ describe('AgentActions', () => {
   it('should show popover when click add resource button', () => {
     const addResourceButton = screen.getByRole('button', { name: '+' });
     userEvent.click(addResourceButton);
-    expect(screen.getByText('Separate multiple resource name with commas')).toBeVisible();
+    expect(screen.getByText(addResourcePopoverText)).toBeVisible();
   });
 
   it('should hide popover when click cancel button', () => {
@@ -84,7 +85,7 @@ describe('AgentActions', () => {
     userEvent.click(addResourceButton);
     const cancelButton = screen.getByRole('button', { name: 'Cancel' });
     userEvent.click(cancelButton);
-    expect(screen.getByText('Separate multiple resource name with commas'))
+    expect(screen.getByText(addResourcePopoverText))
       .not
       .toBeVisible();
   });
@@ -94,7 +95,7 @@ describe('AgentActions', () => {
     userEvent.click(addResourceButton);
     const xButton = screen.getByRole('button', { name: 'X' });
     userEvent.click(xButton);
-    expect(screen.getByText('Separate multiple resource name with commas'))
+    expect(screen.getByText(addResourcePopoverText))
       .not
       .toBeVisible();
   });
