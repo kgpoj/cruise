@@ -2,7 +2,7 @@ import React, { PropsWithChildren, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Popover } from 'antd';
 import { StyledButton } from '../../../../styles';
-import PromptedInput from './PromptedInput';
+import PromptedInput from './prompted-input';
 
 const StyledPopover = styled(Popover)`
   position: relative;
