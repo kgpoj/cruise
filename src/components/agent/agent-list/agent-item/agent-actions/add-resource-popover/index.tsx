@@ -46,6 +46,10 @@ const AddResourcePopover: React.FC<PropsWithChildren> = ({ children }) => {
     setInputValue(value);
   };
 
+  const handleAddClick = (): void => {
+    setOpen(false);
+  };
+
   const content = (
     <div>
       <XButton
@@ -59,7 +63,7 @@ const AddResourcePopover: React.FC<PropsWithChildren> = ({ children }) => {
         candidates={VALID_RESOURCES}
         onInputChange={handleInputChange}
       />
-      <StyledButton>Add Resources</StyledButton>
+      <StyledButton onClick={handleAddClick}>Add Resources</StyledButton>
       <CancelButton onClick={handleCancelClick}>Cancel</CancelButton>
     </div>
   );

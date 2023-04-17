@@ -115,5 +115,15 @@ describe('AgentActions', () => {
       expect(screen.getByRole('button', { name: 'Add Resources' }))
         .toBeVisible();
     });
+
+    it('should hide popover when click `Add Resources` button', () => {
+      const addResourceButton = screen.getByRole('button', { name: '+' });
+      userEvent.click(addResourceButton);
+      const addResourcesButton = screen.getByRole('button', { name: 'Add Resources' });
+      userEvent.click(addResourcesButton);
+      expect(screen.getByText(addResourcePopoverText))
+        .not
+        .toBeVisible();
+    });
   });
 });
