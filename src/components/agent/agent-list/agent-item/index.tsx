@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Avatar, List } from 'antd';
-import { gql, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { Availability, Resource } from '../../../../interface/Agent';
 import AgentInfos from './agent-infos';
 import AgentActions from './agent-actions';
+import ADD_RESOURCES_MUTATION from '../../../../graphql/mutations/addResources';
+import REMOVE_RESOURCE_MUTATION from '../../../../graphql/mutations/removeResource';
 
 interface AgentItemProps {
   iconUrl: string,
@@ -41,39 +43,6 @@ const Content = styled.div`
 
   ${({ theme }) => theme.mediaQueries.isMobile} {
     margin-left: 5px;
-  }
-`;
-
-export const AGENT_FIELDS = gql`
-    fragment AgentFields on Agent {
-        id
-        name
-        iconUrl
-        ipAddress
-        availability
-        agentType
-        resources {
-            id
-            name
-        }
-    }
-`;
-
-export const REMOVE_RESOURCE_MUTATION = gql`
-    ${AGENT_FIELDS}
-  mutation removeResource($agentId: String!, $resourceId: String!) {
-    removeResource(agentId: $agentId, resourceId: $resourceId) {
-        ...AgentFields
-    }
-  }
-`;
-
-export const ADD_RESOURCES_MUTATION = gql`
-    ${AGENT_FIELDS}
-  mutation addResources($agentId: String!, $resourceIds: [String!]!) {
-    addResources(agentId: $agentId, resourceIds: $resourceIds) {
-        ...AgentFields
-    }
   }
 `;
 
