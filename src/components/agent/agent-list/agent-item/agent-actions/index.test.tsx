@@ -125,5 +125,16 @@ describe('AgentActions', () => {
         .not
         .toBeVisible();
     });
+
+    it('should not hide popover when click `Add Resources` button with invalid resource', () => {
+      const addResourceButton = screen.getByRole('button', { name: '+' });
+      userEvent.click(addResourceButton);
+      const addResourcesButton = screen.getByRole('button', { name: 'Add Resources' });
+      const input = screen.getByPlaceholderText(popoverInputPromptText);
+      userEvent.type(input, 'invalid resource');
+      userEvent.click(addResourcesButton);
+      expect(screen.getByText(addResourcePopoverText))
+        .toBeVisible();
+    });
   });
 });

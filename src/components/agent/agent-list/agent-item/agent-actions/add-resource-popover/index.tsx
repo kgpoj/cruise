@@ -26,11 +26,13 @@ const XButton = styled.button`
 
 const VALID_RESOURCE_PROMPT = 'Valid Resources: Firefox, Safari, Ubuntu, Chrome';
 const VALID_RESOURCES = ['firefox', 'chrome', 'safari', 'ubuntu'];
+const separator = ',';
 const AddResourcePopover: React.FC<PropsWithChildren> = ({ children }) => {
   const [open, setOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
 
   useEffect(() => {
+    // eslint-disable-next-line no-console
     console.log(inputValue);
   }, [inputValue]);
 
@@ -46,7 +48,17 @@ const AddResourcePopover: React.FC<PropsWithChildren> = ({ children }) => {
     setInputValue(value);
   };
 
+  const checkValidated = (): boolean => {
+    const resources = inputValue.split(separator)
+      .map((resource) => resource.trim()
+        .toLowerCase());
+    return !inputValue || resources.every((resource) => VALID_RESOURCES.includes(resource));
+  };
+
   const handleAddClick = (): void => {
+    if (!checkValidated()) {
+      return;
+    }
     setOpen(false);
   };
 
