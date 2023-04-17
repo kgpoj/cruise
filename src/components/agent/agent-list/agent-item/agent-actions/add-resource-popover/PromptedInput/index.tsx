@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Input } from 'antd';
 import styled from 'styled-components';
 
 interface Props {
-  candidates: string[];
-  separator?: string;
+  candidates: string[],
+  separator?: string,
+  onInputChange: (value: string) => void,
+  placeholder: string
 }
 
 interface HintProps {
@@ -30,9 +32,15 @@ const Hint = styled.span<HintProps>`
   left: ${(props) => INPUT_PADDING_LEFT + props.offset}px;
 `;
 
-const PromptedInput: React.FC<Props> = ({ candidates, separator = ',' }) => {
+const PromptedInput: React.FC<Props> = ({
+  candidates, separator = ',', onInputChange, placeholder,
+}) => {
   const [inputValue, setInputValue] = useState('');
   const [hint, setHint] = useState('');
+
+  useEffect(() => {
+    onInputChange(inputValue);
+  }, [inputValue]);
 
   const offset = 7.2 * inputValue.length;
 
@@ -67,6 +75,7 @@ const PromptedInput: React.FC<Props> = ({ candidates, separator = ',' }) => {
       onChange={handleChange}
       onKeyDown={handleKeyDown}
       suffix={<Hint offset={offset}>{hint}</Hint>}
+      placeholder={placeholder}
     />
   );
 };

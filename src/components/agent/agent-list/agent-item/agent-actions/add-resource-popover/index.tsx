@@ -1,14 +1,11 @@
-import React, { PropsWithChildren, useState } from 'react';
+import React, { PropsWithChildren, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Input, Popover } from 'antd';
+import { Popover } from 'antd';
 import { StyledButton } from '../../../../styles';
+import PromptedInput from './PromptedInput';
 
 const StyledPopover = styled(Popover)`
   position: relative;
-`;
-
-const StyledInput = styled(Input)`
-  font-size: 12px;
 `;
 
 const CancelButton = styled(StyledButton)`
@@ -27,17 +24,15 @@ const XButton = styled.button`
   color: ${({ theme }) => theme.colors.primary};
 `;
 
-const ErrorMessage = styled.p`
-  color: red;
-  font-size: 12px;
-`;
-
-const INVALID_CHARACTER = 'Please enter commas for separation';
 const VALID_RESOURCE_PROMPT = 'Valid Resources: Firefox, Safari, Ubuntu, Chrome';
 const VALID_RESOURCES = ['firefox', 'chrome', 'safari', 'ubuntu'];
 const AddResourcePopover: React.FC<PropsWithChildren> = ({ children }) => {
   const [open, setOpen] = useState(false);
-  const [error, setError] = useState('');
+  const [inputValue, setInputValue] = useState('');
+
+  useEffect(() => {
+    console.log(inputValue);
+  }, [inputValue]);
 
   const handleCancelClick = (): void => {
     setOpen(false);
@@ -47,24 +42,8 @@ const AddResourcePopover: React.FC<PropsWithChildren> = ({ children }) => {
     setOpen(newOpen);
   };
 
-  const isInvalidResource = (input: string): boolean => {
-    const [latestResource, ...previousResources] = input.toLowerCase().split(',').reverse();
-    const previousResourcesInvalid = previousResources
-      .some((resource) => !VALID_RESOURCES.includes(resource));
-    const latestResourceInvalid = !VALID_RESOURCES
-      .some((validResource) => validResource.startsWith(latestResource));
-    return latestResourceInvalid || previousResourcesInvalid;
-  };
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    const inputPattern = /^[a-zA-Z,]*$/;
-    if (!inputPattern.test(event.target.value)) {
-      setError(INVALID_CHARACTER);
-    } else if (isInvalidResource(event.target.value)) {
-      setError(VALID_RESOURCE_PROMPT);
-    } else {
-      setError('');
-    }
+  const handleInputChange = (value: string): void => {
+    setInputValue(value);
   };
 
   const content = (
@@ -75,12 +54,11 @@ const AddResourcePopover: React.FC<PropsWithChildren> = ({ children }) => {
         X
       </XButton>
       <p>Separate multiple resource name with commas</p>
-      <StyledInput
+      <PromptedInput
         placeholder={VALID_RESOURCE_PROMPT}
-        onChange={handleInputChange}
-        status={error ? 'error' : ''}
+        candidates={VALID_RESOURCES}
+        onInputChange={handleInputChange}
       />
-      {error && <ErrorMessage>{error}</ErrorMessage>}
       <CancelButton onClick={handleCancelClick}>Cancel</CancelButton>
     </div>
   );
