@@ -31,12 +31,15 @@ describe('AgentActions', () => {
   ];
   const mockAvailability: Availability = 'idle';
   const mockOnResourceDelete = jest.fn();
+  const mockOnResourcesAdd = jest.fn();
+
   const wrapper: WrapperFunc = (props?: AgentActionsProps) => {
     renderWithThemeWrapper(
       <AgentActions
         resources={mockResources}
         availability={mockAvailability}
         onResourceDelete={mockOnResourceDelete}
+        onResourcesAdd={mockOnResourcesAdd}
         {...props}
       />,
     );
@@ -149,6 +152,15 @@ describe('AgentActions', () => {
       expect(screen.getByText(addResourcePopoverText))
         .not
         .toBeVisible();
+    });
+
+    it('should call onResourcesAdd when click `Add Resources` button with valid resource', () => {
+      const addResourcesButton = screen.getByRole('button', { name: 'Add Resources' });
+      const input = screen.getByPlaceholderText(popoverInputPromptText);
+      userEvent.type(input, 'Firefox, Chrome, Safari,');
+      userEvent.click(addResourcesButton);
+      expect(mockOnResourcesAdd)
+        .toHaveBeenCalledWith(['1', '2', '3']);
     });
   });
 });
