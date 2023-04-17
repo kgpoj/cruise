@@ -13,6 +13,23 @@ const StyledPopover = styled(Popover)`
   position: relative;
 `;
 
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 130px;
+`;
+
+const InputWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+`;
+
+const ButtonsWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 const CancelButton = styled(StyledButton)`
   background-color: #485362;
 `;
@@ -81,23 +98,27 @@ const AddResourcePopover: React.FC<PropsWithChildren<Props>> = ({ children, onCo
   };
 
   const content = (
-    <div>
+    <Content>
       <XButton
         onClick={handleCancelClick}
       >
         X
       </XButton>
-      <p>Separate multiple resource name with commas</p>
-      <PromptedInput
-        placeholder={VALID_RESOURCE_PROMPT}
-        candidates={validResourceNames}
-        onInputChange={handleInputChange}
-        status={error ? 'error' : ''}
-        errorMessage={VALID_RESOURCE_PROMPT}
-      />
-      <StyledButton onClick={handleAddClick}>Add Resources</StyledButton>
-      <CancelButton onClick={handleCancelClick}>Cancel</CancelButton>
-    </div>
+      <InputWrapper>
+        <p>Separate multiple resource name with commas</p>
+        <PromptedInput
+          placeholder={VALID_RESOURCE_PROMPT}
+          candidates={validResourceNames}
+          onInputChange={handleInputChange}
+          status={error ? 'error' : ''}
+          errorMessage={VALID_RESOURCE_PROMPT}
+        />
+      </InputWrapper>
+      <ButtonsWrapper>
+        <StyledButton onClick={handleAddClick}>Add Resources</StyledButton>
+        <CancelButton onClick={handleCancelClick}>Cancel</CancelButton>
+      </ButtonsWrapper>
+    </Content>
   );
 
   return (
