@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Popover } from 'antd';
 import { StyledButton } from '../../../../styles';
 import PromptedInput from './prompted-input';
+import { Resource, ResourceName } from '../../../../../../interface/Agent';
 
 const StyledPopover = styled(Popover)`
   position: relative;
@@ -24,13 +25,23 @@ const XButton = styled.button`
   color: ${({ theme }) => theme.colors.primary};
 `;
 
+const VALID_RESOURCES: Resource[] = [
+  { id: '1', name: 'Firefox' },
+  { id: '2', name: 'Chrome' },
+  { id: '3', name: 'Safari' },
+  { id: '4', name: 'Ubuntu' },
+];
+const ID_NOT_FOUND = 'ID_NOT_FOUND';
+const getResourceByName = (name: string): Resource | undefined => VALID_RESOURCES
+  .find((r: Resource) => r.name.toLowerCase() === name.toLowerCase());
 const VALID_RESOURCE_PROMPT = 'Valid Resources: Firefox, Safari, Ubuntu, Chrome';
-const VALID_RESOURCES = ['firefox', 'chrome', 'safari', 'ubuntu'];
 const separator = ',';
 const AddResourcePopover: React.FC<PropsWithChildren> = ({ children }) => {
   const [open, setOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState(false);
+
+  const validResourceNames: ResourceName[] = VALID_RESOURCES.map((resource) => resource.name);
 
   useEffect(() => {
     // eslint-disable-next-line no-console
@@ -50,16 +61,18 @@ const AddResourcePopover: React.FC<PropsWithChildren> = ({ children }) => {
     setError(false);
   };
 
-  const checkValidated = (): boolean => {
-    const resources = inputValue.split(separator)
-      .filter((resource) => resource)
-      .map((resource) => resource.trim()
-        .toLowerCase());
-    return !inputValue || resources.every((resource) => VALID_RESOURCES.includes(resource));
-  };
-
+  const checkValidated = (
+    resourceIds: string[],
+  ): boolean => resourceIds.every((resourceId) => resourceId !== ID_NOT_FOUND);
   const handleAddClick = (): void => {
-    if (!checkValidated()) {
+    const resourceNames = inputValue.split(separator)
+      .filter((name) => name)
+      .map((name) => name.trim());
+
+    const resourceIds = resourceNames
+      .map((name) => getResourceByName(name)?.id || ID_NOT_FOUND);
+
+    if (!checkValidated(resourceIds)) {
       setError(true);
       return;
     }
@@ -76,7 +89,7 @@ const AddResourcePopover: React.FC<PropsWithChildren> = ({ children }) => {
       <p>Separate multiple resource name with commas</p>
       <PromptedInput
         placeholder={VALID_RESOURCE_PROMPT}
-        candidates={VALID_RESOURCES}
+        candidates={validResourceNames}
         onInputChange={handleInputChange}
         status={error ? 'error' : ''}
         errorMessage={VALID_RESOURCE_PROMPT}
