@@ -9,7 +9,6 @@ describe('PromptedInput', () => {
   const wrapper = (): void => {
     renderWithThemeWrapper(
       <PromptedInput
-        placeholder={'placeholder'}
         candidates={candidates}
         onInputChange={jest.fn()}
       />,

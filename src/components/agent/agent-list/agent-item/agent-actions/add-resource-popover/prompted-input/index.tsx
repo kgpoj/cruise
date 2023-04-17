@@ -6,7 +6,7 @@ interface Props extends InputProps {
   candidates: string[],
   separator?: string,
   onInputChange: (value: string) => void,
-  placeholder: string
+  errorMessage?: string
 }
 
 interface HintProps {
@@ -32,8 +32,19 @@ const Hint = styled.span<HintProps>`
   left: ${(props) => INPUT_PADDING_LEFT + props.offset}px;
 `;
 
+const ErrorMessage = styled.div`
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+`;
+
 const PromptedInput: React.FC<Props> = ({
-  candidates, separator = ',', onInputChange, placeholder, ...rest
+  candidates,
+  separator = ',',
+  onInputChange,
+  errorMessage,
+  status,
+  ...rest
 }) => {
   const [inputValue, setInputValue] = useState('');
   const [hint, setHint] = useState('');
@@ -80,14 +91,17 @@ const PromptedInput: React.FC<Props> = ({
   };
 
   return (
-    <StyledInput
-      value={inputValue}
-      onChange={handleChange}
-      onKeyDown={handleKeyDown}
-      suffix={<Hint offset={offset}>{hint}</Hint>}
-      placeholder={placeholder}
-      {...rest}
-    />
+    <>
+      <StyledInput
+        value={inputValue}
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
+        suffix={<Hint offset={offset}>{hint}</Hint>}
+        status={status}
+        {...rest}
+      />
+      {status === 'error' && <ErrorMessage>{errorMessage}</ErrorMessage>}
+    </>
   );
 };
 
