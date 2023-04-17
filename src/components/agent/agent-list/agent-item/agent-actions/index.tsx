@@ -2,10 +2,14 @@ import React from 'react';
 import { DeleteOutlined, StopOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { Availability, Resource } from '../../../../../interface/Agent';
+import { StyledButton } from '../../../styles';
+import AddResourcePopover from './add-resource-popover';
 
-interface AgentActionsProps {
+export interface AgentActionsProps {
   resources: Resource[],
   availability: Availability,
+  onResourceDelete: (resourceId: string) => void
+  onResourcesAdd: (resourceIds: string[]) => void
 }
 
 const Actions = styled.div`
@@ -17,19 +21,6 @@ const Actions = styled.div`
   ${({ theme }) => theme.mediaQueries.isMobile} {
     flex-direction: column;
   }
-`;
-
-const StyledButton = styled.button`
-  background-color: ${({ theme }) => theme.colors.primary};
-  color: white;
-  border: none;
-  display: flex;
-  align-items: center;
-  column-gap: 10px;
-  padding: 5px 10px;
-  width: fit-content;
-  height: fit-content;
-  font-weight: bold;
 `;
 
 const DenyButton = styled(StyledButton)`
@@ -58,26 +49,50 @@ const ResourceItem = styled.div`
   align-items: center;
 `;
 
-const AgentActions: React.FC<AgentActionsProps> = ({ resources, availability }) => (
-  <Actions>
-    <ResourcesWrapper>
-      <StyledButton>+</StyledButton>
-      <ResourceItemsWrapper>
-        {resources.map((resource) => (
-          <ResourceItem key={resource.id}>
-            {resource.name}
-            <DeleteOutlined />
-          </ResourceItem>
-        ))}
-      </ResourceItemsWrapper>
-    </ResourcesWrapper>
-    {availability === 'building' && (
-      <DenyButton>
-        <StopOutlined />
-        Deny
-      </DenyButton>
-    )}
-  </Actions>
-);
+const StyledTrashIcon = styled(DeleteOutlined)`
+  cursor: pointer;
+  transition: color 0.3s;
+
+  &:hover {
+    color: red;
+  }
+`;
+
+const AgentActions: React.FC<AgentActionsProps> = ({
+  resources,
+  availability,
+  onResourceDelete,
+  onResourcesAdd,
+}) => {
+  const getResourceItem = (resource: Resource): JSX.Element => {
+    const handleTrashClick = (): void => onResourceDelete(resource.id);
+
+    return (
+      <ResourceItem key={resource.id}>
+        {resource.name}
+        <StyledTrashIcon data-testid="trash-icon" onClick={handleTrashClick} />
+      </ResourceItem>
+    );
+  };
+
+  return (
+    <Actions>
+      <ResourcesWrapper>
+        <AddResourcePopover onConfirm={onResourcesAdd}>
+          <StyledButton>+</StyledButton>
+        </AddResourcePopover>
+        <ResourceItemsWrapper>
+          {resources.map((resource) => getResourceItem(resource))}
+        </ResourceItemsWrapper>
+      </ResourcesWrapper>
+      {availability === 'building' && (
+        <DenyButton>
+          <StopOutlined />
+          Deny
+        </DenyButton>
+      )}
+    </Actions>
+  );
+};
 
 export default AgentActions;

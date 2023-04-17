@@ -24,7 +24,7 @@ const MobileOnlyButton = styled(Button)`
   position: fixed;
   left: 5px;
   top: 10px;
-  z-index: 2;
+  z-index: 3;
   ${({ theme }) => theme.mediaQueries.isDesktop} {
     display: none;
   }
