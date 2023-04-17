@@ -44,9 +44,8 @@ const Content = styled.div`
   }
 `;
 
-export const REMOVE_RESOURCE_MUTATION = gql`
-  mutation removeResource($agentId: String!, $resourceId: String!) {
-    removeResource(agentId: $agentId, resourceId: $resourceId) {
+export const AGENT_FIELDS = gql`
+    fragment AgentFields on Agent {
         id
         name
         iconUrl
@@ -57,6 +56,23 @@ export const REMOVE_RESOURCE_MUTATION = gql`
             id
             name
         }
+    }
+`;
+
+export const REMOVE_RESOURCE_MUTATION = gql`
+    ${AGENT_FIELDS}
+  mutation removeResource($agentId: String!, $resourceId: String!) {
+    removeResource(agentId: $agentId, resourceId: $resourceId) {
+        ...AgentFields
+    }
+  }
+`;
+
+export const ADD_RESOURCES_MUTATION = gql`
+    ${AGENT_FIELDS}
+  mutation addResources($agentId: String!, $resourceIds: [String!]!) {
+    addResources(agentId: $agentId, resourceIds: $resourceIds) {
+        ...AgentFields
     }
   }
 `;
@@ -70,12 +86,22 @@ const AgentItem: React.FC<AgentItemProps> = ({
   id: agentId,
 }) => {
   const [removeResource] = useMutation(REMOVE_RESOURCE_MUTATION);
+  const [addResources] = useMutation(ADD_RESOURCES_MUTATION);
 
   const handleResourceDelete = (resourceId: string): void => {
     removeResource({
       variables: {
         agentId,
         resourceId,
+      },
+    });
+  };
+
+  const handleResourcesAdd = (resourceIds: string[]): void => {
+    addResources({
+      variables: {
+        agentId,
+        resourceIds,
       },
     });
   };
@@ -89,6 +115,7 @@ const AgentItem: React.FC<AgentItemProps> = ({
           resources={resources}
           availability={availability}
           onResourceDelete={handleResourceDelete}
+          onResourcesAdd={handleResourcesAdd}
         />
       </Content>
     </StyledListItem>
