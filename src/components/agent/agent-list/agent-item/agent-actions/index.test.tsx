@@ -108,5 +108,12 @@ describe('AgentActions', () => {
       expect(screen.getByPlaceholderText(popoverInputPromptText))
         .toBeVisible();
     });
+
+    it('should render `Add Resources` button', () => {
+      const addResourceButton = screen.getByRole('button', { name: '+' });
+      userEvent.click(addResourceButton);
+      expect(screen.getByRole('button', { name: 'Add Resources' }))
+        .toBeVisible();
+    });
   });
 });

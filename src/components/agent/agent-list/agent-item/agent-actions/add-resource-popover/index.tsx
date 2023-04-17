@@ -59,6 +59,7 @@ const AddResourcePopover: React.FC<PropsWithChildren> = ({ children }) => {
         candidates={VALID_RESOURCES}
         onInputChange={handleInputChange}
       />
+      <StyledButton>Add Resources</StyledButton>
       <CancelButton onClick={handleCancelClick}>Cancel</CancelButton>
     </div>
   );
