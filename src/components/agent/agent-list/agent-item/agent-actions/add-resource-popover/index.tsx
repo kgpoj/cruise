@@ -130,6 +130,7 @@ const AddResourcePopover: React.FC<PropsWithChildren<Props>> = ({ children, onCo
       trigger="click"
       open={open}
       onOpenChange={handleOpenChange}
+      zIndex={1}
     >
       {children}
     </StyledPopover>
