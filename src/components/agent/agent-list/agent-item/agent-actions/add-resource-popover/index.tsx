@@ -5,6 +5,10 @@ import { StyledButton } from '../../../../styles';
 import PromptedInput from './prompted-input';
 import { Resource, ResourceName } from '../../../../../../interface/Agent';
 
+interface Props {
+  onConfirm: (resourceIds: string[]) => void;
+}
+
 const StyledPopover = styled(Popover)`
   position: relative;
 `;
@@ -36,7 +40,8 @@ const getResourceByName = (name: string): Resource | undefined => VALID_RESOURCE
   .find((r: Resource) => r.name.toLowerCase() === name.toLowerCase());
 const VALID_RESOURCE_PROMPT = 'Valid Resources: Firefox, Safari, Ubuntu, Chrome';
 const separator = ',';
-const AddResourcePopover: React.FC<PropsWithChildren> = ({ children }) => {
+
+const AddResourcePopover: React.FC<PropsWithChildren<Props>> = ({ children, onConfirm }) => {
   const [open, setOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState(false);
@@ -76,6 +81,7 @@ const AddResourcePopover: React.FC<PropsWithChildren> = ({ children }) => {
       setError(true);
       return;
     }
+    onConfirm(resourceIds);
     setOpen(false);
   };
 

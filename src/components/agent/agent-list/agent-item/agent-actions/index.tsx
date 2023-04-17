@@ -9,6 +9,7 @@ export interface AgentActionsProps {
   resources: Resource[],
   availability: Availability,
   onResourceDelete: (resourceId: string) => void
+  onResourcesAdd: (resourceIds: string[]) => void
 }
 
 const Actions = styled.div`
@@ -61,6 +62,7 @@ const AgentActions: React.FC<AgentActionsProps> = ({
   resources,
   availability,
   onResourceDelete,
+  onResourcesAdd,
 }) => {
   const getResourceItem = (resource: Resource): JSX.Element => {
     const handleTrashClick = (): void => onResourceDelete(resource.id);
@@ -76,7 +78,7 @@ const AgentActions: React.FC<AgentActionsProps> = ({
   return (
     <Actions>
       <ResourcesWrapper>
-        <AddResourcePopover>
+        <AddResourcePopover onConfirm={onResourcesAdd}>
           <StyledButton>+</StyledButton>
         </AddResourcePopover>
         <ResourceItemsWrapper>
