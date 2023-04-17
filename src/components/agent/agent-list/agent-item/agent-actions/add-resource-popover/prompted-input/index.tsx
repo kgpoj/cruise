@@ -48,17 +48,21 @@ const PromptedInput: React.FC<Props> = ({
     .map((candidate) => candidate.toLowerCase())
     .sort((a, b) => a.length - b.length);
 
+  const getHint = (typingWord: string | undefined): string => {
+    if (!typingWord) {
+      return '';
+    }
+    const matchedCandidate = candidatesLower.find((word) => word.startsWith(typingWord)) || '';
+
+    return matchedCandidate.slice(typingWord.length);
+  };
+
   const updateHint = (value: string): void => {
     const latestValueLower = value.toLowerCase()
       .split(separator)
       .pop();
-    if (!latestValueLower) {
-      setHint('');
-      return;
-    }
-    const matchedCandidate = candidatesLower.find((word) => word.startsWith(latestValueLower)) || '';
 
-    setHint(matchedCandidate.slice(latestValueLower.length));
+    setHint(getHint(latestValueLower));
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
