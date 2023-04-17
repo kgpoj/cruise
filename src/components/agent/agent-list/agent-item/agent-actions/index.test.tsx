@@ -115,7 +115,7 @@ describe('AgentActions', () => {
         .toBeVisible();
     });
 
-    it('should hide popover when click `Add Resources` button', () => {
+    it('should hide popover when click `Add Resources` button with empty input', () => {
       const addResourcesButton = screen.getByRole('button', { name: 'Add Resources' });
       userEvent.click(addResourcesButton);
       expect(screen.getByText(addResourcePopoverText))
@@ -138,6 +138,16 @@ describe('AgentActions', () => {
       userEvent.type(input, 'invalid resource');
       userEvent.click(addResourcesButton);
       expect(screen.getByText(popoverInputPromptText))
+        .toBeVisible();
+    });
+
+    it('should hide popover when click `Add Resources` button with valid resource', () => {
+      const addResourcesButton = screen.getByRole('button', { name: 'Add Resources' });
+      const input = screen.getByPlaceholderText(popoverInputPromptText);
+      userEvent.type(input, 'Firefox, Chrome, Safari,');
+      userEvent.click(addResourcesButton);
+      expect(screen.getByText(addResourcePopoverText))
+        .not
         .toBeVisible();
     });
   });
