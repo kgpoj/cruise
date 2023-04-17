@@ -3,6 +3,7 @@ import { Input, InputProps } from 'antd';
 import styled from 'styled-components';
 
 interface Props extends InputProps {
+  value?: string;
   candidates: string[],
   separator?: string,
   onInputChange: (value: string) => void,
@@ -39,6 +40,7 @@ const ErrorMessage = styled.div`
 `;
 
 const PromptedInput: React.FC<Props> = ({
+  value: propValue = '',
   candidates,
   separator = ',',
   onInputChange,
@@ -46,11 +48,16 @@ const PromptedInput: React.FC<Props> = ({
   status,
   ...rest
 }) => {
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState(propValue);
   const [hint, setHint] = useState('');
 
   useEffect(() => {
+    setInputValue(propValue);
+  }, [propValue]);
+
+  useEffect(() => {
     onInputChange(inputValue);
+    updateHint(inputValue);
   }, [inputValue]);
 
   const offset = 7.2 * inputValue.length;
@@ -78,7 +85,6 @@ const PromptedInput: React.FC<Props> = ({
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setInputValue(e.target.value);
-    updateHint(e.target.value);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>): void => {

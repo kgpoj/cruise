@@ -4,6 +4,7 @@
     "airbnb-typescript"
   ],
   "rules": {
+    "@typescript-eslint/no-use-before-define": "off",
     "react/jsx-props-no-spreading": "off",
     "react/require-default-props": "off",
     "react/function-component-definition": [
