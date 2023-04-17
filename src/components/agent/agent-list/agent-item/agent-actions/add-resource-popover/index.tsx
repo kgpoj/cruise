@@ -71,6 +71,7 @@ const AddResourcePopover: React.FC<PropsWithChildren<Props>> = ({ children, onCo
 
   const handleOpenChange = (newOpen: boolean): void => {
     setOpen(newOpen);
+    setInputValue('');
   };
 
   const handleInputChange = (value: string): void => {
@@ -107,6 +108,7 @@ const AddResourcePopover: React.FC<PropsWithChildren<Props>> = ({ children, onCo
       <InputWrapper>
         <p>Separate multiple resource name with commas</p>
         <PromptedInput
+          value={inputValue}
           placeholder={VALID_RESOURCE_PROMPT}
           candidates={validResourceNames}
           onInputChange={handleInputChange}

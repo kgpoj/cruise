@@ -162,5 +162,15 @@ describe('AgentActions', () => {
       expect(mockOnResourcesAdd)
         .toHaveBeenCalledWith(['1', '2', '3']);
     });
+
+    it('should clear input when reopen popover', () => {
+      const addResourcesButton = screen.getByRole('button', { name: 'Add Resources' });
+      const input = screen.getByPlaceholderText(popoverInputPromptText);
+      userEvent.type(input, 'Firefox, Chrome, Safari,');
+      userEvent.click(addResourcesButton);
+      showPopover();
+      expect(input)
+        .toHaveValue('');
+    });
   });
 });
