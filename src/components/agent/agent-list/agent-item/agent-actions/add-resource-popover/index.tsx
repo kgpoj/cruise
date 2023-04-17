@@ -52,6 +52,7 @@ const AddResourcePopover: React.FC<PropsWithChildren> = ({ children }) => {
 
   const checkValidated = (): boolean => {
     const resources = inputValue.split(separator)
+      .filter((resource) => resource)
       .map((resource) => resource.trim()
         .toLowerCase());
     return !inputValue || resources.every((resource) => VALID_RESOURCES.includes(resource));
