@@ -136,5 +136,16 @@ describe('AgentActions', () => {
       expect(screen.getByText(addResourcePopoverText))
         .toBeVisible();
     });
+
+    it('should show error message when click `Add Resources` button with invalid resource', () => {
+      const addResourceButton = screen.getByRole('button', { name: '+' });
+      userEvent.click(addResourceButton);
+      const addResourcesButton = screen.getByRole('button', { name: 'Add Resources' });
+      const input = screen.getByPlaceholderText(popoverInputPromptText);
+      userEvent.type(input, 'invalid resource');
+      userEvent.click(addResourcesButton);
+      expect(screen.getByText(popoverInputPromptText))
+        .toBeVisible();
+    });
   });
 });

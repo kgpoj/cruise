@@ -30,6 +30,7 @@ const separator = ',';
 const AddResourcePopover: React.FC<PropsWithChildren> = ({ children }) => {
   const [open, setOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     // eslint-disable-next-line no-console
@@ -46,6 +47,7 @@ const AddResourcePopover: React.FC<PropsWithChildren> = ({ children }) => {
 
   const handleInputChange = (value: string): void => {
     setInputValue(value);
+    setError(false);
   };
 
   const checkValidated = (): boolean => {
@@ -57,6 +59,7 @@ const AddResourcePopover: React.FC<PropsWithChildren> = ({ children }) => {
 
   const handleAddClick = (): void => {
     if (!checkValidated()) {
+      setError(true);
       return;
     }
     setOpen(false);
@@ -74,6 +77,8 @@ const AddResourcePopover: React.FC<PropsWithChildren> = ({ children }) => {
         placeholder={VALID_RESOURCE_PROMPT}
         candidates={VALID_RESOURCES}
         onInputChange={handleInputChange}
+        status={error ? 'error' : ''}
+        errorMessage={VALID_RESOURCE_PROMPT}
       />
       <StyledButton onClick={handleAddClick}>Add Resources</StyledButton>
       <CancelButton onClick={handleCancelClick}>Cancel</CancelButton>
