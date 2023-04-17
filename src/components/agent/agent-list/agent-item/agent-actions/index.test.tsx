@@ -76,15 +76,20 @@ describe('AgentActions', () => {
   });
 
   describe('add resource popover', () => {
+    const showPopover = (): void => {
+      const plusButton = screen.getByRole('button', { name: '+' });
+      userEvent.click(plusButton);
+    };
+
+    beforeEach(() => {
+      showPopover();
+    });
+
     it('should show popover when click add resource button', () => {
-      const addResourceButton = screen.getByRole('button', { name: '+' });
-      userEvent.click(addResourceButton);
       expect(screen.getByText(addResourcePopoverText)).toBeVisible();
     });
 
     it('should hide popover when click cancel button', () => {
-      const addResourceButton = screen.getByRole('button', { name: '+' });
-      userEvent.click(addResourceButton);
       const cancelButton = screen.getByRole('button', { name: 'Cancel' });
       userEvent.click(cancelButton);
       expect(screen.getByText(addResourcePopoverText))
@@ -93,8 +98,6 @@ describe('AgentActions', () => {
     });
 
     it('should hide popover when click x button', () => {
-      const addResourceButton = screen.getByRole('button', { name: '+' });
-      userEvent.click(addResourceButton);
       const xButton = screen.getByRole('button', { name: 'X' });
       userEvent.click(xButton);
       expect(screen.getByText(addResourcePopoverText))
@@ -103,22 +106,16 @@ describe('AgentActions', () => {
     });
 
     it('should have placeholder text', () => {
-      const addResourceButton = screen.getByRole('button', { name: '+' });
-      userEvent.click(addResourceButton);
       expect(screen.getByPlaceholderText(popoverInputPromptText))
         .toBeVisible();
     });
 
     it('should render `Add Resources` button', () => {
-      const addResourceButton = screen.getByRole('button', { name: '+' });
-      userEvent.click(addResourceButton);
       expect(screen.getByRole('button', { name: 'Add Resources' }))
         .toBeVisible();
     });
 
     it('should hide popover when click `Add Resources` button', () => {
-      const addResourceButton = screen.getByRole('button', { name: '+' });
-      userEvent.click(addResourceButton);
       const addResourcesButton = screen.getByRole('button', { name: 'Add Resources' });
       userEvent.click(addResourcesButton);
       expect(screen.getByText(addResourcePopoverText))
@@ -127,8 +124,6 @@ describe('AgentActions', () => {
     });
 
     it('should not hide popover when click `Add Resources` button with invalid resource', () => {
-      const addResourceButton = screen.getByRole('button', { name: '+' });
-      userEvent.click(addResourceButton);
       const addResourcesButton = screen.getByRole('button', { name: 'Add Resources' });
       const input = screen.getByPlaceholderText(popoverInputPromptText);
       userEvent.type(input, 'invalid resource');
@@ -138,8 +133,6 @@ describe('AgentActions', () => {
     });
 
     it('should show error message when click `Add Resources` button with invalid resource', () => {
-      const addResourceButton = screen.getByRole('button', { name: '+' });
-      userEvent.click(addResourceButton);
       const addResourcesButton = screen.getByRole('button', { name: 'Add Resources' });
       const input = screen.getByPlaceholderText(popoverInputPromptText);
       userEvent.type(input, 'invalid resource');
