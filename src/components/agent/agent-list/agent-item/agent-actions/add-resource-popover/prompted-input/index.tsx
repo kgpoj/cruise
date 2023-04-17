@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Input } from 'antd';
+import { Input, InputProps } from 'antd';
 import styled from 'styled-components';
 
-interface Props {
+interface Props extends InputProps {
   candidates: string[],
   separator?: string,
   onInputChange: (value: string) => void,
@@ -33,7 +33,7 @@ const Hint = styled.span<HintProps>`
 `;
 
 const PromptedInput: React.FC<Props> = ({
-  candidates, separator = ',', onInputChange, placeholder,
+  candidates, separator = ',', onInputChange, placeholder, ...rest
 }) => {
   const [inputValue, setInputValue] = useState('');
   const [hint, setHint] = useState('');
@@ -86,6 +86,7 @@ const PromptedInput: React.FC<Props> = ({
       onKeyDown={handleKeyDown}
       suffix={<Hint offset={offset}>{hint}</Hint>}
       placeholder={placeholder}
+      {...rest}
     />
   );
 };
