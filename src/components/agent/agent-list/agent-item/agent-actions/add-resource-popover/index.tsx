@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useEffect, useState } from 'react';
+import React, { PropsWithChildren, useState } from 'react';
 import styled from 'styled-components';
 import { Popover } from 'antd';
 import { StyledButton } from '../../../../styles';
@@ -47,11 +47,6 @@ const AddResourcePopover: React.FC<PropsWithChildren<Props>> = ({ children, onCo
   const [error, setError] = useState(false);
 
   const validResourceNames: ResourceName[] = VALID_RESOURCES.map((resource) => resource.name);
-
-  useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log(inputValue);
-  }, [inputValue]);
 
   const handleCancelClick = (): void => {
     setOpen(false);
