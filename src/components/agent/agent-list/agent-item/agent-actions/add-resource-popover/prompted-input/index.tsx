@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { Input, InputProps } from 'antd';
 import styled from 'styled-components';
 
@@ -55,7 +55,7 @@ const PromptedInput: React.FC<Props> = ({
     setInputValue(propValue);
   }, [propValue]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     onInputChange(inputValue);
     updateHint(inputValue);
   }, [inputValue]);
