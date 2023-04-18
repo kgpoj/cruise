@@ -92,7 +92,6 @@ const PromptedInput: React.FC<Props> = ({
       e.stopPropagation();
       e.preventDefault();
       setInputValue(inputValue + hint + separator);
-      setHint('');
     }
   };
 
