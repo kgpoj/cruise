@@ -10,10 +10,6 @@ interface Props extends InputProps {
   errorMessage?: string
 }
 
-interface HintProps {
-  offset: number;
-}
-
 const INPUT_PADDING_LEFT = 11;
 
 const StyledInput = styled(Input)`
@@ -22,15 +18,15 @@ const StyledInput = styled(Input)`
   padding-left: ${INPUT_PADDING_LEFT}px;
   
   & input {
-    font-family: Monaco, monospace;
+    background: transparent;
   }
 `;
 
-const Hint = styled.span<HintProps>`
-  font-family: Monaco, monospace;
+const Hint = styled.span`
   color: #999;
   position: absolute;
-  left: ${(props) => INPUT_PADDING_LEFT + props.offset}px;
+  left: ${INPUT_PADDING_LEFT}px;
+  z-index: -1;
 `;
 
 const ErrorMessage = styled.div`
@@ -60,8 +56,6 @@ const PromptedInput: React.FC<Props> = ({
     updateHint(inputValue);
   }, [inputValue]);
 
-  const offset = 7.2 * inputValue.length;
-
   const candidatesLower = candidates
     .map((candidate) => candidate.toLowerCase())
     .sort((a, b) => a.length - b.length);
@@ -80,7 +74,7 @@ const PromptedInput: React.FC<Props> = ({
       .split(separator)
       .pop();
 
-    setHint(getHint(latestValueLower));
+    setHint(value + getHint(latestValueLower));
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -91,7 +85,7 @@ const PromptedInput: React.FC<Props> = ({
     if ((e.key === 'Tab' || e.key === 'ArrowRight') && hint) {
       e.stopPropagation();
       e.preventDefault();
-      setInputValue(inputValue + hint + separator);
+      setInputValue(hint + separator);
     }
   };
 
@@ -101,7 +95,7 @@ const PromptedInput: React.FC<Props> = ({
         value={inputValue}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
-        suffix={<Hint offset={offset}>{hint}</Hint>}
+        suffix={<Hint>{hint}</Hint>}
         status={status}
         {...rest}
       />
