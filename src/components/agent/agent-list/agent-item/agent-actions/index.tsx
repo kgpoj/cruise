@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { DeleteOutlined, StopOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { Availability, Resource } from '../../../../../interface/Agent';
 import { StyledButton } from '../../../styles';
-import AddResourcePopover from './add-resource-popover';
+
+const AddResourcePopover = React.lazy(
+  () => import('./add-resource-popover'),
+);
 
 export interface AgentActionsProps {
   resources: Resource[],
@@ -78,9 +81,11 @@ const AgentActions: React.FC<AgentActionsProps> = ({
   return (
     <Actions>
       <ResourcesWrapper>
-        <AddResourcePopover onConfirm={onResourcesAdd}>
-          <StyledButton>+</StyledButton>
-        </AddResourcePopover>
+        <Suspense fallback={<div>Loading...</div>}>
+          <AddResourcePopover onConfirm={onResourcesAdd}>
+            <StyledButton>+</StyledButton>
+          </AddResourcePopover>
+        </Suspense>
         <ResourceItemsWrapper>
           {resources.map((resource) => getResourceItem(resource))}
         </ResourceItemsWrapper>
