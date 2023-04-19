@@ -27,7 +27,7 @@ describe('PromptedInput', () => {
   it('should display hint for matched candidate', () => {
     const input = screen.getByRole('textbox');
     userEvent.type(input, 'f');
-    expect(screen.getByText('ire')).toBeInTheDocument();
+    expect(screen.getByText('fire')).toBeInTheDocument();
   });
 
   it('should autocomplete with hint when Tab key is pressed', () => {
@@ -47,7 +47,7 @@ describe('PromptedInput', () => {
   it('should display hint for matched candidate when separator is entered', () => {
     const input = screen.getByRole('textbox');
     userEvent.type(input, 'fire,firef');
-    expect(screen.getByText('ox')).toBeInTheDocument();
+    expect(screen.getByText('fire,firefox')).toBeInTheDocument();
   });
 
   it('should autocomplete with hint and separator when Tab key is pressed', () => {
