@@ -18,7 +18,7 @@ const IDLE_ICON_COLOR = '#9cc65b';
 const StyledCard = styled(Card)<StyledCardProps>`
   flex: 1;
   height: ${({ theme }) => theme.heights.normalCard};
-  background-color: ${(props) => (props.cardtype === 'building'
+  background-color: ${(props) => (props.cardtype === Availability.Building
     ? props.theme.colors.building
     : props.theme.colors.idle
   )};
@@ -75,7 +75,7 @@ const capitalizeFirstLetter = (str: string): string => str.charAt(0).toUpperCase
 const AvailabilityBox: React.FC<Props> = ({ type, number }) => (
   <StyledCard cardtype={type}>
     <TitleWrapper>{capitalizeFirstLetter(type)}</TitleWrapper>
-    {type === 'building' ? <BuildingIcon /> : <IdleIcon />}
+    {type === Availability.Building ? <BuildingIcon /> : <IdleIcon />}
     <NumberWrapper>{number}</NumberWrapper>
   </StyledCard>
 );

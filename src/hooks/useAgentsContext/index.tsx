@@ -2,7 +2,7 @@ import React, { createContext, useContext, useMemo } from 'react';
 import { useQuery } from '@apollo/client';
 import { Agent } from '../../interface/Agent';
 import GET_AGENTS_QUERY from '../../graphql/queries/getAgents';
-import { GetAgentsResponse } from '../../interface/graphql/queries/GetAgentsResponse';
+// import { GetAgentsResponse } from '../../interface/graphql/queries/GetAgentsResponse';
 
 export interface ContextValues {
   data: Agent[];
@@ -15,7 +15,7 @@ interface Props {
 }
 
 export const AgentsContextProvider: React.FC<Props> = ({ children }) => {
-  const { data } = useQuery<GetAgentsResponse>(GET_AGENTS_QUERY);
+  const { data } = useQuery(GET_AGENTS_QUERY);
   const exposedValues = useMemo(() => ({ data: data?.agents || [] }), [data]);
 
   return (

@@ -3,9 +3,12 @@ import { RenderResult, screen } from '@testing-library/react';
 import renderWithGlobalWrapper from '../../../../utils/testUtils';
 import AgentItem from './index';
 import mockAgentsData from '../../../../mock/mockAgentsData';
+import { Availability } from '../../../../__generated__/graphql';
 
-const buildingItem = mockAgentsData.filter((item) => item.availability === 'building')[0];
-const idleItem = mockAgentsData.filter((item) => item.availability === 'idle')[0];
+const buildingItem = mockAgentsData
+  .filter((item) => item.availability === Availability.Building)[0];
+const idleItem = mockAgentsData
+  .filter((item) => item.availability === Availability.Idle)[0];
 const renderBuildingItem = (): RenderResult => renderWithGlobalWrapper(
   <AgentItem
     id={buildingItem.id}

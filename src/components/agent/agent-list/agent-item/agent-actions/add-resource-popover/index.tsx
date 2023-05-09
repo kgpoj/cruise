@@ -47,10 +47,10 @@ const XButton = styled.button`
 `;
 
 const VALID_RESOURCES: Resource[] = [
-  { id: '1', name: 'Firefox' },
-  { id: '2', name: 'Chrome' },
-  { id: '3', name: 'Safari' },
-  { id: '4', name: 'Ubuntu' },
+  { id: '1', name: ResourceName.Firefox },
+  { id: '2', name: ResourceName.Chrome },
+  { id: '3', name: ResourceName.Safari },
+  { id: '4', name: ResourceName.Ubuntu },
 ];
 const ID_NOT_FOUND = 'ID_NOT_FOUND';
 const getResourceByName = (name: string): Resource | undefined => VALID_RESOURCES

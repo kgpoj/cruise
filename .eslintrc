@@ -21,5 +21,6 @@
   },
   "parserOptions": {
     "project": "./tsconfig.json"
-  }
+  },
+  "ignorePatterns": ["src/__generated__/*"]
 }

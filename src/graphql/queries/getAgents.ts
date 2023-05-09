@@ -1,6 +1,7 @@
-import { gql } from '@apollo/client';
+// import { gql } from '@apollo/client';
+import { gql } from '../../__generated__';
 
-const GET_AGENTS_QUERY = gql`
+const GET_AGENTS_QUERY = gql(/* GraphQL */ `
     query getAgents{
         agents {
             id
@@ -15,6 +16,6 @@ const GET_AGENTS_QUERY = gql`
             }
         }
     }
-`;
+`);
 
 export default GET_AGENTS_QUERY;

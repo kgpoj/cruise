@@ -4,7 +4,7 @@ import 'jest-styled-components';
 import userEvent from '@testing-library/user-event';
 import AgentActions, { AgentActionsProps } from './index';
 import { renderWithThemeWrapper } from '../../../../../utils/testUtils';
-import { Availability, Resource } from '../../../../../interface/Agent';
+import { Availability, Resource, ResourceName } from '../../../../../interface/Agent';
 
 type WrapperFunc = (props?: AgentActionsProps) => void;
 
@@ -14,22 +14,22 @@ describe('AgentActions', () => {
   const mockResources: Resource[] = [
     {
       id: '1',
-      name: 'Firefox',
+      name: ResourceName.Firefox,
     },
     {
       id: '2',
-      name: 'Chrome',
+      name: ResourceName.Chrome,
     },
     {
       id: '3',
-      name: 'Safari',
+      name: ResourceName.Safari,
     },
     {
       id: '4',
-      name: 'Ubuntu',
+      name: ResourceName.Ubuntu,
     },
   ];
-  const mockAvailability: Availability = 'idle';
+  const mockAvailability: Availability = Availability.Idle;
   const mockOnResourceDelete = jest.fn();
   const mockOnResourcesAdd = jest.fn();
 

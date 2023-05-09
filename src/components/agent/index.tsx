@@ -4,7 +4,7 @@ import { RadioChangeEvent } from 'antd';
 import AgentTypeBox from './agent-type-box';
 import AvailabilityBox from './availability-box';
 import AgentTypeFilter from './agent-type-filter';
-import { TypeFilter } from '../../interface/Agent';
+import { Availability, TypeFilter } from '../../interface/Agent';
 import AgentList from './agent-list';
 import { useAgentsContext } from '../../hooks/useAgentsContext';
 
@@ -41,8 +41,8 @@ const Agent = (): JSX.Element => {
   return (
     <PageWrapper>
       <StatusBoxWrapper>
-        <AvailabilityBox type="building" number={4} />
-        <AvailabilityBox type="idle" number={4} />
+        <AvailabilityBox type={Availability.Building} number={4} />
+        <AvailabilityBox type={Availability.Idle} number={4} />
         <AgentTypeBox physicalCount={4} virtualCount={5} />
       </StatusBoxWrapper>
       <AgentTypeFilter onChange={handleRadioChange} />

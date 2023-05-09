@@ -90,7 +90,7 @@ const AgentActions: React.FC<AgentActionsProps> = ({
           {resources.map((resource) => getResourceItem(resource))}
         </ResourceItemsWrapper>
       </ResourcesWrapper>
-      {availability === 'building' && (
+      {availability === Availability.Building && (
         <DenyButton>
           <StopOutlined />
           Deny

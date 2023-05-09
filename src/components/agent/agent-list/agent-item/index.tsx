@@ -9,7 +9,7 @@ import ADD_RESOURCES_MUTATION from '../../../../graphql/mutations/addResources';
 import REMOVE_RESOURCE_MUTATION from '../../../../graphql/mutations/removeResource';
 
 interface AgentItemProps {
-  iconUrl: string,
+  iconUrl?: string | null,
   name: string,
   availability: Availability,
   ipAddress: string,

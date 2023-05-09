@@ -3,7 +3,7 @@ import type { RadioChangeEvent } from 'antd';
 import { Radio } from 'antd';
 import styled, { css } from 'styled-components';
 import { Colors } from '../../../interface/Colors';
-import { TypeFilter } from '../../../interface/Agent';
+import { AgentType, TypeFilter } from '../../../interface/Agent';
 
 interface AgentTypeFilterProps {
   onChange: (e: RadioChangeEvent) => void
@@ -58,8 +58,8 @@ const AgentTypeButton = ({ value, children }: AgentTypeButtonProps): JSX.Element
 const AgentTypeFilter = ({ onChange }: AgentTypeFilterProps): JSX.Element => (
   <StyledRadioGroup onChange={onChange} defaultValue="all">
     <AgentTypeButton value="all">All</AgentTypeButton>
-    <AgentTypeButton value="physical">Physical</AgentTypeButton>
-    <AgentTypeButton value="virtual">Virtual</AgentTypeButton>
+    <AgentTypeButton value={AgentType.Physical}>Physical</AgentTypeButton>
+    <AgentTypeButton value={AgentType.Virtual}>Virtual</AgentTypeButton>
   </StyledRadioGroup>
 );
 
