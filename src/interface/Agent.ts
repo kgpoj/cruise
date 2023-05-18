@@ -1,22 +1,14 @@
-export type Availability = 'building' | 'idle';
+import {
+  AgentType,
+  Availability,
+  ResourceName,
+  Agent as AgentGql,
+  Resource as ResourceGql,
+} from '../__generated__/graphql';
 
-export type AgentType = 'physical' | 'virtual';
+export { Availability, ResourceName, AgentType };
 
-export type ResourceName = 'Firefox' | 'Chrome' | 'Safari' | 'Ubuntu';
-
-export interface Resource {
-  id: string;
-  name: ResourceName;
-}
-
-export interface Agent {
-  id: string;
-  name: string;
-  iconUrl: string;
-  ipAddress: string;
-  availability: Availability;
-  agentType: AgentType;
-  resources: Resource[];
-}
+export type Agent = Omit<AgentGql, '__typename'>;
+export type Resource = Omit<ResourceGql, '__typename'>;
 
 export type TypeFilter = AgentType | 'all';

@@ -1,4 +1,6 @@
-import { Agent } from '../interface/Agent';
+import {
+  Agent, AgentType, Availability, ResourceName,
+} from '../interface/Agent';
 
 const mockAgentsData: Agent[] = [
   {
@@ -6,24 +8,24 @@ const mockAgentsData: Agent[] = [
     name: 'Agent 1',
     iconUrl: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50',
     ipAddress: '192.168.1.102',
-    availability: 'building',
-    agentType: 'physical',
+    availability: Availability.Building,
+    agentType: AgentType.Physical,
     resources: [
       {
         id: '1',
-        name: 'Firefox',
+        name: ResourceName.Firefox,
       },
       {
         id: '2',
-        name: 'Chrome',
+        name: ResourceName.Chrome,
       },
       {
         id: '3',
-        name: 'Safari',
+        name: ResourceName.Safari,
       },
       {
         id: '4',
-        name: 'Ubuntu',
+        name: ResourceName.Ubuntu,
       },
     ],
   },
@@ -32,16 +34,16 @@ const mockAgentsData: Agent[] = [
     name: 'Agent 2',
     iconUrl: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50',
     ipAddress: '192.168.1.103',
-    availability: 'idle',
-    agentType: 'virtual',
+    availability: Availability.Idle,
+    agentType: AgentType.Virtual,
     resources: [
       {
         id: '1',
-        name: 'Firefox',
+        name: ResourceName.Firefox,
       },
       {
         id: '2',
-        name: 'Chrome',
+        name: ResourceName.Chrome,
       },
     ],
   },
@@ -50,20 +52,20 @@ const mockAgentsData: Agent[] = [
     name: 'Agent 3',
     iconUrl: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50',
     ipAddress: '192.168.1.104',
-    availability: 'building',
-    agentType: 'physical',
+    availability: Availability.Building,
+    agentType: AgentType.Physical,
     resources: [
       {
         id: '1',
-        name: 'Firefox',
+        name: ResourceName.Firefox,
       },
       {
         id: '2',
-        name: 'Chrome',
+        name: ResourceName.Chrome,
       },
       {
         id: '3',
-        name: 'Safari',
+        name: ResourceName.Safari,
       },
     ],
   },
@@ -72,12 +74,12 @@ const mockAgentsData: Agent[] = [
     name: 'Agent 4',
     iconUrl: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50',
     ipAddress: '192.168.1.105',
-    availability: 'idle',
-    agentType: 'virtual',
+    availability: Availability.Idle,
+    agentType: AgentType.Virtual,
     resources: [
       {
         id: '1',
-        name: 'Firefox',
+        name: ResourceName.Firefox,
       },
     ],
   },
@@ -86,8 +88,8 @@ const mockAgentsData: Agent[] = [
     name: 'Agent 5',
     iconUrl: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50',
     ipAddress: '192.168.1.106',
-    availability: 'building',
-    agentType: 'physical',
+    availability: Availability.Building,
+    agentType: AgentType.Physical,
     resources: [],
   },
   {
@@ -95,12 +97,12 @@ const mockAgentsData: Agent[] = [
     name: 'Agent 6',
     iconUrl: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50',
     ipAddress: '192.168.1.107',
-    availability: 'idle',
-    agentType: 'virtual',
+    availability: Availability.Idle,
+    agentType: AgentType.Virtual,
     resources: [
       {
         id: '4',
-        name: 'Ubuntu',
+        name: ResourceName.Ubuntu,
       },
     ],
   },
@@ -109,12 +111,12 @@ const mockAgentsData: Agent[] = [
     name: 'Agent 7',
     iconUrl: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50',
     ipAddress: '192.168.1.108',
-    availability: 'building',
-    agentType: 'physical',
+    availability: Availability.Building,
+    agentType: AgentType.Physical,
     resources: [
       {
         id: '2',
-        name: 'Chrome',
+        name: ResourceName.Chrome,
       },
     ],
   },
@@ -123,12 +125,12 @@ const mockAgentsData: Agent[] = [
     name: 'Agent 8',
     iconUrl: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50',
     ipAddress: '192.168.1.109',
-    availability: 'idle',
-    agentType: 'virtual',
+    availability: Availability.Idle,
+    agentType: AgentType.Virtual,
     resources: [
       {
         id: '3',
-        name: 'Safari',
+        name: ResourceName.Safari,
       },
     ],
   },

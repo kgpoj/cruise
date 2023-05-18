@@ -5,6 +5,7 @@ import Agent from './index';
 import mockAgentsData from '../../mock/mockAgentsData';
 import renderWithGlobalWrapper from '../../utils/testUtils';
 import MockedAgentsContextProvider from '../../utils/MockedAgentsContextProvider';
+import { AgentType } from '../../__generated__/graphql';
 
 describe('Agent', () => {
   it('should render correctly', () => {
@@ -29,8 +30,10 @@ describe('Agent', () => {
     waitFor(() => {
       userEvent.click(screen.getByRole('radio', { name: 'Virtual' }));
 
-      const virtualAgents = mockAgentsData.filter((agent) => agent.agentType === 'virtual');
-      const physicalAgents = mockAgentsData.filter((agent) => agent.agentType === 'physical');
+      const virtualAgents = mockAgentsData
+        .filter((agent) => agent.agentType === AgentType.Virtual);
+      const physicalAgents = mockAgentsData
+        .filter((agent) => agent.agentType === AgentType.Physical);
       virtualAgents.map((agent) => agent.name).forEach((name) => {
         expect(screen.getByText(name)).toBeInTheDocument();
       });

@@ -37,7 +37,7 @@ const InfoItem = styled.div`
 `;
 
 const StyledTag = styled(Tag)<StyledTagProps>`
-  background-color: ${({ type, theme }) => theme.colors[type]};
+  background-color: ${({ type, theme }) => (type === Availability.Idle ? theme.colors.idle : theme.colors.building)};
   color: white;
   font-size: inherit;
 

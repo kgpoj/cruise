@@ -1,32 +1,49 @@
-import React from 'react';
+import React, { PropsWithChildren, ReactElement } from 'react';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory, MemoryHistory } from 'history';
 import { ThemeProvider } from 'styled-components';
 import { render, RenderOptions } from '@testing-library/react';
 import theme from '../constants/theme';
+import ApolloMockedProvider from './ApolloMockedProvider';
 
 type ConstructorWithHistory = (history?: MemoryHistory) => React.FC;
-type RenderWithWrapper = (
-  children: React.ReactElement,
-  history?: MemoryHistory,
-) => ReturnType<typeof render>;
 
-const createWrapper: ConstructorWithHistory = (
+const ThemeWrapper: React.FC<PropsWithChildren> = ({ children }) => (
+  <ThemeProvider theme={theme}>
+    {children}
+  </ThemeProvider>
+);
+export const GlobalWrapper: React.FC<PropsWithChildren> = ({ children }) => (
+  <ThemeWrapper>
+    <ApolloMockedProvider>
+      {children}
+    </ApolloMockedProvider>
+  </ThemeWrapper>
+);
+const createGlobalWrapperWithHistory: ConstructorWithHistory = (
   history = createMemoryHistory(),
 ) => ({ children }: React.PropsWithChildren): JSX.Element => (
   <Router location={history.location} navigator={history}>
-    <ThemeProvider theme={theme}>
+    <GlobalWrapper>
       {children}
-    </ThemeProvider>
+    </GlobalWrapper>
   </Router>
 );
 
-const renderWithGlobalWrapper: RenderWithWrapper = (
-  children,
-  history?,
+export const renderWithThemeWrapper = (
+  children: ReactElement,
   options?: RenderOptions,
-) => render(children, {
-  wrapper: createWrapper(history),
+): ReturnType<typeof render> => render(children, {
+  wrapper: ThemeWrapper,
+  ...options,
+});
+
+const renderWithGlobalWrapper = (
+  children: ReactElement,
+  history?: MemoryHistory,
+  options?: RenderOptions,
+): ReturnType<typeof render> => render(children, {
+  wrapper: createGlobalWrapperWithHistory(history),
   ...options,
 });
 export default renderWithGlobalWrapper;

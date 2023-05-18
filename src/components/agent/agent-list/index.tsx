@@ -13,6 +13,7 @@ const AgentList = ({ dataSource }: AgentListProps): JSX.Element => (
     dataSource={dataSource}
     renderItem={(item) => (
       <AgentItem
+        id={item.id}
         iconUrl={item.iconUrl}
         name={item.name}
         availability={item.availability}
