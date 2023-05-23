@@ -21,7 +21,7 @@ pipeline {
                 echo 'Deploying....'
                 script {
                     def instanceHost = '3.26.103.169'
-                    def remotePath = '/var/www/html'
+                    def remotePath = '/cruise'
 
                     // Start SSH agent and add private key
                     sshagent(credentials: ['ec2-ssh-key']) {
