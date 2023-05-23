@@ -7,6 +7,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'npm install'
+                sh 'npm run lint'
                 sh 'npm run test'
             }
         }
