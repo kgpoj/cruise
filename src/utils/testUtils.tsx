@@ -2,6 +2,7 @@ import React, { PropsWithChildren, ReactElement } from 'react';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory, MemoryHistory } from 'history';
 import { ThemeProvider } from 'styled-components';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { render, RenderOptions } from '@testing-library/react';
 import theme from '../constants/theme';
 import ApolloMockedProvider from './ApolloMockedProvider';
