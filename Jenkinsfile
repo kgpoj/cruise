@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'npm run Build'
+                sh 'npm run build'
             }
         }
         stage('Deploy') {
