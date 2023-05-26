@@ -48,7 +48,7 @@ pipeline {
           steps {
                 echo 'Deploying....'
                 script {
-                    def instanceHost = '13.236.66.159'
+                    def instanceHost = '13.237.77.78'
                     def remotePath = '~/cruise'
 
                     // Start SSH agent and add private key
