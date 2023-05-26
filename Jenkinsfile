@@ -6,6 +6,7 @@ pipeline {
     stages {
         stage('Test') {
             steps {
+                sh 'pwd'
                 sh 'npm install'
                 sh 'npm run lint'
                 sh 'npm run test'
@@ -34,7 +35,7 @@ pipeline {
                 }
             }
         }
-        stage('Confirm prod') {
+        stage('Deploy to prod') {
           options {
               timeout(time: 60, unit: 'SECONDS')
           }
